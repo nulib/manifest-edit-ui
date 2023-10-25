@@ -1,4 +1,5 @@
 import App from "../components/App";
+import Editor from "../layouts/Editor";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -7,6 +8,6 @@ const root = createRoot(container!);
 
 root.render(
   <App>
-    <p>home page</p>
+    <Editor />
   </App>
 );

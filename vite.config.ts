@@ -15,7 +15,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
-        edit: resolve(root, "edit", "index.html"),
       },
     },
   },
