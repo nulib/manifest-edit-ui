@@ -1,0 +1,10 @@
+# node
+node_modules
+
+# build
+dist
+dist-ssr
+*.local
+
+# os
+.DS_Store
