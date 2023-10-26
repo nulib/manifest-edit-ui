@@ -5,6 +5,7 @@ import {
   TableCell,
   TableRow,
   TableRowHeaderCell,
+  Text,
 } from "@radix-ui/themes";
 import React, { MouseEventHandler } from "react";
 
@@ -17,19 +18,23 @@ interface UITableRowProps {
 
 const UITableRow: React.FC<UITableRowProps> = ({
   label,
-  // id,
+  id,
   provider,
   status,
 }) => {
   const { dispatch } = useAppContext();
+
   const handleManifestClick: MouseEventHandler<HTMLAnchorElement> = () => {
     dispatch({ type: ActionTypes.SET_SCREEN, payload: "Manifest" });
+    dispatch({ type: ActionTypes.SET_ACTIVE_MANIFEST, payload: id });
   };
 
   return (
     <TableRow>
       <TableRowHeaderCell>
-        <Link onClick={handleManifestClick}>{label}</Link>
+        <Text size="3" weight="bold">
+          <Link onClick={handleManifestClick}>{label}</Link>
+        </Text>
       </TableRowHeaderCell>
       <TableCell>{provider}</TableCell>
       <TableCell>
