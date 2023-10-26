@@ -1,3 +1,5 @@
+const projectTitle = "Maktaba";
+
 const data = [
   {
     id: "1",
@@ -14,4 +16,4 @@ const data = [
   })),
 ];
 
-export { data };
+export { data, projectTitle };

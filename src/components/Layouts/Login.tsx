@@ -10,6 +10,8 @@ import {
 } from "@radix-ui/themes";
 import React, { FormEventHandler } from "react";
 
+import { projectTitle } from "../../data";
+
 const Login = () => {
   const { dispatch } = useAppContext();
 
@@ -20,7 +22,7 @@ const Login = () => {
   return (
     <Section>
       <Container size="1">
-        <Heading align="center">Maktaba Editor</Heading>
+        <Heading align="center">{projectTitle} Editor</Heading>
         <Box pt="4" asChild>
           <form onSubmit={handleLogin}>
             <Grid columns="1" gap="2">
