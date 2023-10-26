@@ -5,18 +5,13 @@ const data = [
     provider: "Northwestern",
     status: false,
   },
-  {
-    id: "2",
-    label: "Lipsum",
-    provider: "Northwestern",
-    status: true,
-  },
-  {
-    id: "3",
-    label: "Fuqut",
-    provider: "Illinois",
-    status: false,
-  },
+
+  ...Array.from({ length: 29 }, (_, i) => ({
+    id: (i + 4).toString(),
+    label: `Item ${i + 4}`,
+    provider: Math.random() > 0.5 ? "Northwestern" : "Illinois",
+    status: Math.random() > 0.5,
+  })),
 ];
 
 export { data };

@@ -1,10 +1,12 @@
 import "@radix-ui/themes/styles.css";
 import "../styles/global.css";
 
+import { AppProvider } from "../context/AppContext";
+import Editor from "./Editor";
 import React from "react";
 import { Theme } from "@radix-ui/themes";
 
-const App = ({ children }: { children: React.ReactNode }) => {
+const App = () => {
   return (
     <Theme
       accentColor="indigo"
@@ -13,7 +15,9 @@ const App = ({ children }: { children: React.ReactNode }) => {
       scaling="110%"
       radius="medium"
     >
-      {children}
+      <AppProvider>
+        <Editor />
+      </AppProvider>
     </Theme>
   );
 };

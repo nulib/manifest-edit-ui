@@ -10,7 +10,7 @@ import React from "react";
 
 const UITable = ({ children }: { children: React.ReactNode[] }) => {
   return (
-    <TableRoot>
+    <TableRoot variant="surface">
       <TableHeader>
         <TableRow>
           <TableColumnHeaderCell>Label</TableColumnHeaderCell>

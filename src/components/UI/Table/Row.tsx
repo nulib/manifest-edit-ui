@@ -1,14 +1,12 @@
+import { ActionTypes, useAppContext } from "../../../context/AppContext";
 import {
   Badge,
-  Button,
-  Flex,
-  Separator,
+  Link,
   TableCell,
   TableRow,
   TableRowHeaderCell,
 } from "@radix-ui/themes";
-
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
 interface UITableRowProps {
   label: string;
@@ -19,17 +17,24 @@ interface UITableRowProps {
 
 const UITableRow: React.FC<UITableRowProps> = ({
   label,
-  id,
+  // id,
   provider,
   status,
 }) => {
+  const { dispatch } = useAppContext();
+  const handleManifestClick: MouseEventHandler<HTMLAnchorElement> = () => {
+    dispatch({ type: ActionTypes.SET_SCREEN, payload: "Manifest" });
+  };
+
   return (
     <TableRow>
-      <TableRowHeaderCell>{label}</TableRowHeaderCell>
+      <TableRowHeaderCell>
+        <Link onClick={handleManifestClick}>{label}</Link>
+      </TableRowHeaderCell>
       <TableCell>{provider}</TableCell>
       <TableCell>
         {status ? (
-          <Badge variant="solid">Public</Badge>
+          <Badge>Public</Badge>
         ) : (
           <Badge color="crimson">Private</Badge>
         )}
