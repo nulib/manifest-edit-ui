@@ -92,7 +92,7 @@ const Manifest = () => {
               iiifContent={activeManifest}
               customTheme={customTheme}
               options={{
-                canvasHeight: "25vh",
+                canvasHeight: "480px",
                 showTitle: false,
                 showIIIFBadge: false,
                 informationPanel: {
