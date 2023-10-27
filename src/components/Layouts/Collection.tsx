@@ -7,13 +7,17 @@ import {
   Flex,
   Heading,
   Section,
+  TableBody,
+  TableColumnHeaderCell,
+  TableHeader,
+  TableRow,
   Text,
 } from "@radix-ui/themes";
 import React, { MouseEventHandler } from "react";
 import { data, projectTitle } from "../../data";
 
-import Table from "../UI/Table/Table";
-import TableRow from "../UI/Table/Row";
+import UITable from "../UI/Table/Table";
+import UITableCollectionRow from "../UI/Table/CollectionRow";
 
 const Collection = () => {
   const { dispatch } = useAppContext();
@@ -30,7 +34,7 @@ const Collection = () => {
             <Heading>{projectTitle} Collection</Heading>
             <Box pt="1">
               <Text size="2">
-                Resources available for the <Em>{projectTitle}</Em> IIIF
+                Manifests available for the <Em>{projectTitle}</Em> IIIF
                 Collection
               </Text>
             </Box>
@@ -43,11 +47,20 @@ const Collection = () => {
           </Flex>
         </Flex>
         <Box pt="4">
-          <Table>
-            {data.map((item) => (
-              <TableRow {...item} key={item.id} />
-            ))}
-          </Table>
+          <UITable>
+            <TableHeader>
+              <TableRow>
+                <TableColumnHeaderCell>Label</TableColumnHeaderCell>
+                <TableColumnHeaderCell>Provider</TableColumnHeaderCell>
+                <TableColumnHeaderCell>Status</TableColumnHeaderCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data.map((item) => (
+                <UITableCollectionRow {...item} key={item.id} />
+              ))}
+            </TableBody>
+          </UITable>
         </Box>
       </Container>
     </Section>
