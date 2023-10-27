@@ -14,3 +14,5 @@ npm run build
 npm run dev
 ```
 - Local:  http://localhost:5173/
+
+## License
