@@ -40,7 +40,7 @@ const Collection = () => {
             </Box>
           </Box>
           <Flex gap="3">
-            <Button variant="outline" onClick={handleLogout}>
+            <Button variant="soft" color="gray" onClick={handleLogout}>
               Logout
             </Button>
             <Button>Publish {projectTitle}</Button>

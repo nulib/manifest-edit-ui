@@ -2,11 +2,13 @@ import { ActionTypes, useAppContext } from "../../context/AppContext";
 import {
   Box,
   Button,
+  Checkbox,
   Container,
   Em,
   Flex,
   Heading,
   Section,
+  Switch,
   TableBody,
   TableColumnHeaderCell,
   TableHeader,
@@ -72,8 +74,15 @@ const Manifest = () => {
               <Text size="2">Canvases available for IIIF Manifest</Text>
             </Box>
           </Box>
-          <Flex gap="3">
-            <Button variant="outline" onClick={handleBack}>
+          <Flex gap="3" align="center">
+            <Box pr="2">
+              <Text as="label" size="2">
+                <Flex gap="2">
+                  <Switch size="3" /> Public
+                </Flex>
+              </Text>
+            </Box>
+            <Button variant="soft" color="gray" onClick={handleBack}>
               Back
             </Button>
             <Button>Save</Button>

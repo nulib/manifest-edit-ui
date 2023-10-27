@@ -25,24 +25,21 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({ canvas }) => {
   return (
     <TableRow>
       <TableRowHeaderCell>
-        <Card>
-          <Flex gap="3" align="center">
-            <Inset clip="padding-box" side="left">
-              <Thumbnail
-                thumbnail={canvas.thumbnail}
-                style={{
-                  display: "block",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: 50,
-                  backgroundColor: "var(--gray-5)",
-                }}
-              />
-            </Inset>
+        <Flex gap="3" align="center">
+          <Thumbnail
+            thumbnail={canvas.thumbnail}
+            style={{
+              display: "block",
+              objectFit: "cover",
+              width: 35,
+              height: 35,
+              backgroundColor: "var(--gray-5)",
+              borderRadius: 3,
+            }}
+          />
 
-            <Label label={canvas.label} />
-          </Flex>
-        </Card>
+          <Label label={canvas.label} />
+        </Flex>
       </TableRowHeaderCell>
       <TableCell>
         <Flex gap="3">
