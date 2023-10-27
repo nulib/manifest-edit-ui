@@ -44,25 +44,23 @@ const Manifest = () => {
         });
   }, [activeManifest]);
 
-  // const customTheme = {
-  //   colors: {
-  //     accent: "var(--indigo-10)",
-  //     accentAlt: "var(--indigo-12)",
-  //     accentMuted: "var(--indigo-8)",
-  //     primary: "var(--slate-12)",
-  //     primaryAlt: "var(--slate-12)",
-  //     primaryMuted: "var(--slate-10)",
-  //     secondary: "var(--slate-1",
-  //     secondaryAlt: "var(--slate-3",
-  //     secondaryMuted: "var(--slate-2",
-  //   },
-  //   fonts: {
-  //     sans: `$sans`,
-  //     display: `$display`,
-  //   },
-  // };
-
-  console.log(manifest);
+  const customTheme = {
+    colors: {
+      accent: "var(--indigo-10)",
+      accentAlt: "var(--indigo-12)",
+      accentMuted: "var(--indigo-8)",
+      primary: "var(--slate-12)",
+      primaryAlt: "var(--slate-12)",
+      primaryMuted: "var(--slate-10)",
+      secondary: "var(--slate-1",
+      secondaryAlt: "var(--slate-3",
+      secondaryMuted: "var(--slate-2",
+    },
+    fonts: {
+      sans: `$sans`,
+      display: `$display`,
+    },
+  };
 
   return (
     <Section size="2">
@@ -90,6 +88,19 @@ const Manifest = () => {
         </Flex>
         {manifest && (
           <Section pt="4">
+            <CloverViewer
+              iiifContent={activeManifest}
+              customTheme={customTheme}
+              options={{
+                canvasHeight: "25vh",
+                showTitle: false,
+                showIIIFBadge: false,
+                informationPanel: {
+                  open: false,
+                  renderToggle: false,
+                },
+              }}
+            />
             <UITable>
               <TableHeader>
                 <TableRow>

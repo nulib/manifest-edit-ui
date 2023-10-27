@@ -16,6 +16,7 @@ import { Label, Thumbnail } from "@samvera/clover-iiif/primitives";
 import React, { MouseEventHandler } from "react";
 
 import { Canvas } from "@iiif/presentation-3";
+import Viewer from "@samvera/clover-iiif/viewer";
 
 interface UITableRowProps {
   canvas: Canvas;
