@@ -2,27 +2,17 @@ import { ActionTypes, useAppContext } from "../../../context/AppContext";
 import {
   Badge,
   Box,
-  Button,
-  Card,
-  Dialog,
   Flex,
-  IconButton,
-  Inset,
-  Link,
-  ScrollArea,
   TableCell,
   TableRow,
   TableRowHeaderCell,
-  Text,
-  TextField,
 } from "@radix-ui/themes";
 // @ts-ignore
 import { Label, Thumbnail } from "@samvera/clover-iiif/primitives";
 
 import { Canvas } from "@iiif/presentation-3";
 import React from "react";
-import { StarFilledIcon } from "@radix-ui/react-icons";
-import UIDialog from "./Dialog";
+import UIDialog from "../Dialog";
 import UIScrollArea from "../ScrollArea";
 
 interface UITableRowProps {
@@ -55,7 +45,7 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
               height: 35,
               backgroundColor: "var(--gray-5)",
               borderRadius: 3,
-              boxShadow: "2px 2px 5px var(--gray-8)",
+              boxShadow: "1px 1px 2px var(--gray-8)",
             }}
           />
 
@@ -67,7 +57,7 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
           />
           {isActiveCanvas && (
             <Badge size="1" variant="outline">
-              Active
+              Active in Viewer
             </Badge>
           )}
         </Flex>
@@ -76,24 +66,24 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
         {hasTranscription ? (
           <Flex direction="column" gap="3">
             <Box>
-              <UIDialog type="Transcription" method="Update" />
+              <UIDialog type="Translation" method="Update" />
             </Box>
-            <UIScrollArea />
+            <UIScrollArea type="Translation" />
           </Flex>
         ) : (
-          <UIDialog type="Transcription" method="Add" />
+          <UIDialog type="Translation" method="Add" />
         )}
       </TableCell>
       <TableCell>
         {hasTranscription ? (
           <Flex direction="column" gap="3">
             <Box>
-              <UIDialog type="Translation" method="Update" />
+              <UIDialog type="Transcription" method="Update" />
             </Box>
-            <UIScrollArea />
+            <UIScrollArea type="Transcription" />
           </Flex>
         ) : (
-          <UIDialog type="Translation" method="Add" />
+          <UIDialog type="Transcription" method="Add" />
         )}
       </TableCell>
     </TableRow>

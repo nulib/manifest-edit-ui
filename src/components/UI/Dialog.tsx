@@ -1,6 +1,14 @@
-import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
+import {
+  Button,
+  Dialog,
+  Flex,
+  Text,
+  TextArea,
+  TextField,
+} from "@radix-ui/themes";
 
 import React from "react";
+import { mock } from "../../data";
 
 const UIDialog = ({
   method,
@@ -9,6 +17,14 @@ const UIDialog = ({
   method: "Add" | "Update";
   type: "Transcription" | "Translation";
 }) => {
+  // @ts-ignore
+  const defaultValue =
+    method === "Add"
+      ? undefined
+      : type === "Transcription"
+      ? mock.transcription
+      : mock.translation;
+
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -16,28 +32,15 @@ const UIDialog = ({
           {method} {type}
         </Button>
       </Dialog.Trigger>
-      <Dialog.Content style={{ maxWidth: 450 }}>
-        <Dialog.Title>Edit profile</Dialog.Title>
-        <Dialog.Description size="2" mb="4">
-          Make changes to your profile.
-        </Dialog.Description>
+      <Dialog.Content style={{ maxWidth: 600 }}>
         <Flex direction="column" gap="3">
           <label>
-            <Text as="div" size="2" mb="1" weight="bold">
-              Name
-            </Text>
-            <TextField.Input
-              defaultValue="Freja Johnsen"
-              placeholder="Enter your full name"
-            />
-          </label>
-          <label>
-            <Text as="div" size="2" mb="1" weight="bold">
-              Email
-            </Text>
-            <TextField.Input
-              defaultValue="freja@example.com"
-              placeholder="Enter your email"
+            <Dialog.Title>Edit {type}</Dialog.Title>
+            <TextArea
+              defaultValue={defaultValue}
+              placeholder={`Add ${type.toLowerCase()}`}
+              style={{ height: "300px", maxHeight: "50vh" }}
+              size="2"
             />
           </label>
         </Flex>
