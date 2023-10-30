@@ -17,6 +17,7 @@ import {
 } from "@radix-ui/themes";
 import React, { MouseEventHandler, useEffect, useState } from "react";
 
+// @ts-ignore
 import CloverViewer from "@samvera/clover-iiif/viewer";
 import UITable from "../UI/Table/Table";
 import UITableCanvasRow from "../UI/Table/CanvasRow";
@@ -114,13 +115,16 @@ const Manifest = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {manifest?.items?.map((item) => (
-                  <UITableCanvasRow
-                    canvas={item}
-                    isActiveCanvas={item.id === activeCanvas}
-                    key={item.id}
-                  />
-                ))}
+                {
+                  // @ts-ignore
+                  manifest?.items?.map((item) => (
+                    <UITableCanvasRow
+                      canvas={item}
+                      isActiveCanvas={item.id === activeCanvas}
+                      key={item.id}
+                    />
+                  ))
+                }
               </TableBody>
             </UITable>
           </Section>

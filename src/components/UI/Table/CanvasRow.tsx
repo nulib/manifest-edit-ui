@@ -16,6 +16,7 @@ import {
   Text,
   TextField,
 } from "@radix-ui/themes";
+// @ts-ignore
 import { Label, Thumbnail } from "@samvera/clover-iiif/primitives";
 
 import { Canvas } from "@iiif/presentation-3";
