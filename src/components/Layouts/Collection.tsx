@@ -28,23 +28,9 @@ const Collection = () => {
 
   return (
     <Section size="1" pr="5" pl="5">
-      <Flex justify="between">
-        <Box>
-          <Heading>{projectTitle} Collection</Heading>
-          <Box pt="1">
-            <Text size="2">
-              Manifests available for the <Em>{projectTitle}</Em> IIIF
-              Collection
-            </Text>
-          </Box>
-        </Box>
-        <Flex gap="3">
-          <Button variant="soft" color="gray" onClick={handleLogout}>
-            Logout
-          </Button>
-          <Button>Publish {projectTitle}</Button>
-        </Flex>
-      </Flex>
+      <Text size="2">
+        Manifests available for the <Em>{projectTitle}</Em> IIIF Collection
+      </Text>
       <Box pt="4">
         <UITable>
           <TableHeader>
