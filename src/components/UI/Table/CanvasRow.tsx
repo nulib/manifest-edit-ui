@@ -1,11 +1,15 @@
 import { ActionTypes, useAppContext } from "../../../context/AppContext";
 import {
+  Badge,
+  Box,
   Button,
   Card,
   Dialog,
   Flex,
+  IconButton,
   Inset,
   Link,
+  ScrollArea,
   TableCell,
   TableRow,
   TableRowHeaderCell,
@@ -13,19 +17,33 @@ import {
   TextField,
 } from "@radix-ui/themes";
 import { Label, Thumbnail } from "@samvera/clover-iiif/primitives";
-import React, { MouseEventHandler } from "react";
 
 import { Canvas } from "@iiif/presentation-3";
-import Viewer from "@samvera/clover-iiif/viewer";
+import React from "react";
+import { StarFilledIcon } from "@radix-ui/react-icons";
+import UIDialog from "./Dialog";
+import UIScrollArea from "../ScrollArea";
 
 interface UITableRowProps {
   canvas: Canvas;
+  isActiveCanvas: boolean;
 }
 
-const UITableCanvasRow: React.FC<UITableRowProps> = ({ canvas }) => {
+const UITableCanvasRow: React.FC<UITableRowProps> = ({
+  canvas,
+  isActiveCanvas,
+}) => {
+  // randomly set hasTranscription to true or false
+  // mocks a possible transcription being available
+  const hasTranscription = Math.random() >= 0.5;
+
   return (
-    <TableRow>
-      <TableRowHeaderCell>
+    <TableRow
+      style={{
+        backgroundColor: isActiveCanvas ? "var(--indigo-3)" : "inherit",
+      }}
+    >
+      <TableRowHeaderCell width="30%">
         <Flex gap="3" align="center">
           <Thumbnail
             thumbnail={canvas.thumbnail}
@@ -36,101 +54,46 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({ canvas }) => {
               height: 35,
               backgroundColor: "var(--gray-5)",
               borderRadius: 3,
+              boxShadow: "2px 2px 5px var(--gray-8)",
             }}
           />
 
-          <Label label={canvas.label} />
+          <Label
+            label={canvas.label}
+            style={{
+              fontWeight: isActiveCanvas ? "bold" : "normal",
+            }}
+          />
+          {isActiveCanvas && (
+            <Badge size="1" variant="outline">
+              Active
+            </Badge>
+          )}
         </Flex>
       </TableRowHeaderCell>
       <TableCell>
-        <Flex gap="3">
-          <Dialog.Root>
-            <Dialog.Trigger>
-              <Button>Add Transcript</Button>
-            </Dialog.Trigger>
-            <Dialog.Content style={{ maxWidth: 450 }}>
-              <Dialog.Title>Edit profile</Dialog.Title>
-              <Dialog.Description size="2" mb="4">
-                Make changes to your profile.
-              </Dialog.Description>
-
-              <Flex direction="column" gap="3">
-                <label>
-                  <Text as="div" size="2" mb="1" weight="bold">
-                    Name
-                  </Text>
-                  <TextField.Input
-                    defaultValue="Freja Johnsen"
-                    placeholder="Enter your full name"
-                  />
-                </label>
-                <label>
-                  <Text as="div" size="2" mb="1" weight="bold">
-                    Email
-                  </Text>
-                  <TextField.Input
-                    defaultValue="freja@example.com"
-                    placeholder="Enter your email"
-                  />
-                </label>
-              </Flex>
-
-              <Flex gap="3" mt="4" justify="end">
-                <Dialog.Close>
-                  <Button variant="soft" color="gray">
-                    Cancel
-                  </Button>
-                </Dialog.Close>
-                <Dialog.Close>
-                  <Button>Save</Button>
-                </Dialog.Close>
-              </Flex>
-            </Dialog.Content>
-          </Dialog.Root>
-          <Dialog.Root>
-            <Dialog.Trigger>
-              <Button>Add Translation</Button>
-            </Dialog.Trigger>
-            <Dialog.Content style={{ maxWidth: 450 }}>
-              <Dialog.Title>Edit profile</Dialog.Title>
-              <Dialog.Description size="2" mb="4">
-                Make changes to your profile.
-              </Dialog.Description>
-
-              <Flex direction="column" gap="3">
-                <label>
-                  <Text as="div" size="2" mb="1" weight="bold">
-                    Name
-                  </Text>
-                  <TextField.Input
-                    defaultValue="Freja Johnsen"
-                    placeholder="Enter your full name"
-                  />
-                </label>
-                <label>
-                  <Text as="div" size="2" mb="1" weight="bold">
-                    Email
-                  </Text>
-                  <TextField.Input
-                    defaultValue="freja@example.com"
-                    placeholder="Enter your email"
-                  />
-                </label>
-              </Flex>
-
-              <Flex gap="3" mt="4" justify="end">
-                <Dialog.Close>
-                  <Button variant="soft" color="gray">
-                    Cancel
-                  </Button>
-                </Dialog.Close>
-                <Dialog.Close>
-                  <Button>Save</Button>
-                </Dialog.Close>
-              </Flex>
-            </Dialog.Content>
-          </Dialog.Root>
-        </Flex>
+        {hasTranscription ? (
+          <Flex direction="column" gap="3">
+            <Box>
+              <UIDialog type="Transcription" method="Update" />
+            </Box>
+            <UIScrollArea />
+          </Flex>
+        ) : (
+          <UIDialog type="Transcription" method="Add" />
+        )}
+      </TableCell>
+      <TableCell>
+        {hasTranscription ? (
+          <Flex direction="column" gap="3">
+            <Box>
+              <UIDialog type="Translation" method="Update" />
+            </Box>
+            <UIScrollArea />
+          </Flex>
+        ) : (
+          <UIDialog type="Translation" method="Add" />
+        )}
       </TableCell>
     </TableRow>
   );

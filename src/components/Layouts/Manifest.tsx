@@ -24,6 +24,7 @@ import { data } from "../../data";
 
 const Manifest = () => {
   const [manifest, setManifest] = useState();
+  const [activeCanvas, setActiveCanvas] = useState<String>();
 
   const { dispatch, state } = useAppContext();
   const { activeManifest } = state;
@@ -62,6 +63,9 @@ const Manifest = () => {
     },
   };
 
+  const handlCanvasIdCallback = (activeCanvasId: string) =>
+    setActiveCanvas(activeCanvasId);
+
   return (
     <Section size="2">
       <Container>
@@ -83,12 +87,12 @@ const Manifest = () => {
             <Button variant="soft" color="gray" onClick={handleBack}>
               Back
             </Button>
-            <Button>Save</Button>
           </Flex>
         </Flex>
         {manifest && (
           <Section pt="4">
             <CloverViewer
+              canvasIdCallback={handlCanvasIdCallback}
               iiifContent={activeManifest}
               customTheme={customTheme}
               options={{
@@ -105,12 +109,17 @@ const Manifest = () => {
               <TableHeader>
                 <TableRow>
                   <TableColumnHeaderCell>Canvas</TableColumnHeaderCell>
-                  <TableColumnHeaderCell>Annotations</TableColumnHeaderCell>
+                  <TableColumnHeaderCell>Transcription</TableColumnHeaderCell>
+                  <TableColumnHeaderCell>Translation</TableColumnHeaderCell>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {manifest?.items?.map((item) => (
-                  <UITableCanvasRow canvas={item} key={item.id} />
+                  <UITableCanvasRow
+                    canvas={item}
+                    isActiveCanvas={item.id === activeCanvas}
+                    key={item.id}
+                  />
                 ))}
               </TableBody>
             </UITable>
