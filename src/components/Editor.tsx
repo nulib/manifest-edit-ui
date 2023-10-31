@@ -1,5 +1,7 @@
+import "@aws-amplify/ui-react/styles.css";
+
 import { ActionTypes, useAppContext } from "../context/AppContext";
-import { Box, Button, Flex, Heading } from "@radix-ui/themes";
+import { Box, Button, Em, Flex, Heading, Text } from "@radix-ui/themes";
 import React, { MouseEventHandler } from "react";
 
 import { Amplify } from "aws-amplify";
@@ -26,13 +28,32 @@ const Editor = () => {
   };
 
   return (
-    <Authenticator hideSignUp>
+    <Authenticator
+      components={{
+        Header() {
+          return (
+            <Box pb="4">
+              <Flex justify="center">
+                <Heading style={{ color: "var(--gray-1)" }}>
+                  {projectTitle} Editor
+                </Heading>
+              </Flex>
+            </Box>
+          );
+        },
+      }}
+      hideSignUp
+      variation="modal"
+    >
       {({ signOut, user }) => (
         <>
           <Box pr="5" pl="5" pt="5">
             <Flex justify="between" align="center">
               <Heading size="4">{projectTitle} Collection</Heading>
-              <Flex gap="3">
+              <Flex gap="3" align="center">
+                <Text size="1">
+                  Logged in as <Em>{user?.username}</Em>
+                </Text>
                 <Button variant="soft" color="gray" onClick={signOut}>
                   Logout
                 </Button>
