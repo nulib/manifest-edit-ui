@@ -1,4 +1,5 @@
 import "@radix-ui/themes/styles.css";
+import "../styles/app.css";
 import "@aws-amplify/ui-react/styles.css";
 
 import { AppProvider } from "../context/AppContext";
