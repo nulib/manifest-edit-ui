@@ -20,8 +20,15 @@ const UIScrollArea = ({ type }: { type: "Transcription" | "Translation" }) => {
       type="hover"
     >
       <Flex direction="column" gap="2">
-        {text.split(`\n\n`).map((paragraph: string) => (
-          <Text as="p" size={size} align={align} dir={dir}>
+        {text.split(`\n\n`).map((paragraph: string, index) => (
+          <Text
+            key={index}
+            as="p"
+            size={size}
+            align={align}
+            dir={dir}
+            data-testid="scroll-area-text"
+          >
             {paragraph}
           </Text>
         ))}
