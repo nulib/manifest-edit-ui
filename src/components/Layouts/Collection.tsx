@@ -1,11 +1,6 @@
-import { ActionTypes, useAppContext } from "../../context/AppContext";
 import {
   Box,
-  Button,
-  Container,
   Em,
-  Flex,
-  Heading,
   Section,
   TableBody,
   TableColumnHeaderCell,
@@ -13,18 +8,35 @@ import {
   TableRow,
   Text,
 } from "@radix-ui/themes";
-import React, { MouseEventHandler } from "react";
-import { data, projectTitle } from "../../data";
+import React, { useEffect, useState } from "react";
 
+import { ManifestEditorManifest } from "../../types/manifest-editor";
 import UITable from "../UI/Table/Table";
 import UITableCollectionItemsRow from "../UI/Table/CollectionItemsRow";
+import { projectTitle } from "../../data";
+import { useAppContext } from "../../context/AppContext";
 
 const Collection = () => {
-  const { dispatch } = useAppContext();
+  const [manifests, setManifests] = useState<ManifestEditorManifest[]>([]);
 
-  const handleLogout: MouseEventHandler<HTMLButtonElement> = () => {
-    dispatch({ type: ActionTypes.LOGOUT });
-  };
+  const { state } = useAppContext();
+  const { authToken } = state;
+
+  useEffect(() => {
+    const baseUrl =
+      "https://67qdcv50f4.execute-api.us-east-1.amazonaws.com/prod";
+
+    fetch(`${baseUrl}/manifests`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${authToken}` },
+      redirect: "follow",
+    })
+      .then(async (response) => await new Response(response.body).json())
+      .then((result) => setManifests(result))
+      .catch((error) => console.log("error", error));
+  }, []);
+
+  if (!manifests) return null;
 
   return (
     <Section size="1" pr="5" pl="5">
@@ -41,8 +53,8 @@ const Collection = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((item) => (
-              <UITableCollectionItemsRow {...item} key={item.id} />
+            {manifests.map((item) => (
+              <UITableCollectionItemsRow item={item} key={item.uri} />
             ))}
           </TableBody>
         </UITable>

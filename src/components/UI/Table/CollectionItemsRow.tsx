@@ -11,59 +11,34 @@ import {
 } from "@radix-ui/themes";
 import React, { MouseEventHandler } from "react";
 
-// @ts-ignore
-import { Thumbnail } from "@samvera/clover-iiif/primitives";
+import { ManifestEditorManifest } from "../../../types/manifest-editor";
 
 interface UITableRowProps {
-  label: string;
-  id: string;
-  provider: string;
-  status: boolean;
-  thumbnail: string;
+  item: ManifestEditorManifest;
 }
 
-const UITableRow: React.FC<UITableRowProps> = ({
-  label,
-  id,
-  provider,
-  status,
-  thumbnail,
-}) => {
+const UITableRow: React.FC<UITableRowProps> = ({ item }) => {
   const { dispatch } = useAppContext();
 
   const handleManifestClick: MouseEventHandler<HTMLAnchorElement> = () => {
     dispatch({ type: ActionTypes.SET_SCREEN, payload: "Manifest" });
-    dispatch({ type: ActionTypes.SET_ACTIVE_MANIFEST, payload: id });
+    dispatch({ type: ActionTypes.SET_ACTIVE_MANIFEST, payload: item.uri });
   };
 
   return (
     <TableRow>
       <TableRowHeaderCell>
         <Link onClick={handleManifestClick}>
-          <Flex gap="3" align="center">
-            <img
-              src={thumbnail}
-              style={{
-                display: "block",
-                objectFit: "cover",
-                width: 35,
-                height: 35,
-                backgroundColor: "var(--gray-5)",
-                borderRadius: 3,
-                boxShadow: "1px 1px 2px var(--gray-8)",
-              }}
-            />
-            <Box>
-              <Text size="3" weight="bold">
-                {label}
-              </Text>
-            </Box>
-          </Flex>
+          <Box>
+            <Text size="3" weight="bold">
+              {item.label}
+            </Text>
+          </Box>
         </Link>
       </TableRowHeaderCell>
-      <TableCell>{provider}</TableCell>
+      <TableCell>{item.provider}</TableCell>
       <TableCell>
-        {status ? (
+        {item.public ? (
           <Badge>Public</Badge>
         ) : (
           <Badge color="crimson">Private</Badge>

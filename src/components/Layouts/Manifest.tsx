@@ -23,7 +23,7 @@ const Manifest = () => {
   const [manifest, setManifest] = useState();
   const [activeCanvas, setActiveCanvas] = useState<String>();
 
-  const { dispatch, state } = useAppContext();
+  const { state } = useAppContext();
   const { activeManifest } = state;
 
   const item = data.find((item) => item.id === activeManifest);
