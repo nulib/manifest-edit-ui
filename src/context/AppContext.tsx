@@ -1,26 +1,21 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 
-// Define the initial state for your context
+import { useAuthenticator } from "@aws-amplify/ui-react";
+
 interface AppState {
-  loggedIn: boolean;
   screen: "Collection" | "Manifest" | "Canvas";
   activeCanvas?: string;
   activeManifest?: string;
+  authToken?: string;
 }
 
-// Define the actions you can dispatch
 enum ActionTypes {
-  LOGIN = "LOGIN",
-  LOGOUT = "LOGOUT",
   SET_SCREEN = "SET_SCREEN",
   SET_ACTIVE_CANVAS = "SET_ACTIVE_CANVAS",
   SET_ACTIVE_MANIFEST = "SET_ACTIVE_MANIFEST",
 }
 
-// Define action types
 type AppAction =
-  | { type: ActionTypes.LOGIN }
-  | { type: ActionTypes.LOGOUT }
   | { type: ActionTypes.SET_SCREEN; payload: AppState["screen"] }
   | { type: ActionTypes.SET_ACTIVE_CANVAS; payload: AppState["activeCanvas"] }
   | {
@@ -28,13 +23,8 @@ type AppAction =
       payload: AppState["activeManifest"];
     };
 
-// Create a reducer function to handle state changes based on actions
 const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
-    case ActionTypes.LOGIN:
-      return { ...state, loggedIn: true };
-    case ActionTypes.LOGOUT:
-      return { ...state, loggedIn: false };
     case ActionTypes.SET_SCREEN:
       return { ...state, screen: action.payload };
     case ActionTypes.SET_ACTIVE_CANVAS:
@@ -46,7 +36,6 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
   }
 };
 
-// Create the context
 const AppContext = createContext<
   | {
       state: AppState;
@@ -55,7 +44,6 @@ const AppContext = createContext<
   | undefined
 >(undefined);
 
-// Create a custom hook for using the context
 const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {
@@ -64,19 +52,22 @@ const useAppContext = () => {
   return context;
 };
 
-// Create a context provider component
 interface AppProviderProps {
   children: ReactNode;
 }
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, {
-    loggedIn: false,
     screen: "Collection",
   });
 
+  const { user } = useAuthenticator();
+
+  // @ts-ignore
+  const authToken = user?.signInUserSession.idToken.jwtToken;
+
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state: { ...state, authToken }, dispatch }}>
       {children}
     </AppContext.Provider>
   );

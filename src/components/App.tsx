@@ -1,24 +1,42 @@
 import "@radix-ui/themes/styles.css";
 import "../styles/app.css";
 
+import { Amplify } from "aws-amplify";
 import { AppProvider } from "../context/AppContext";
+import { Authenticator } from "@aws-amplify/ui-react";
 import Editor from "./Editor";
 import React from "react";
 import { Theme } from "@radix-ui/themes";
+import authenticatorComponents from "./Vendor/Amplify/Authenticator";
+import awsExports from "../aws-exports";
+
+Amplify.configure({
+  Auth: {
+    region: awsExports.REGION,
+    userPoolId: awsExports.USER_POOL_ID,
+    userPoolWebClientId: awsExports.USER_POOL_APP_CLIENT_ID,
+  },
+});
 
 const App = () => {
   return (
-    <Theme
-      accentColor="indigo"
-      grayColor="slate"
-      panelBackground="translucent"
-      scaling="110%"
-      radius="medium"
+    <Authenticator
+      components={authenticatorComponents}
+      hideSignUp
+      variation="modal"
     >
       <AppProvider>
-        <Editor />
+        <Theme
+          accentColor="indigo"
+          grayColor="slate"
+          panelBackground="translucent"
+          scaling="110%"
+          radius="medium"
+        >
+          <Editor />
+        </Theme>
       </AppProvider>
-    </Theme>
+    </Authenticator>
   );
 };
 
