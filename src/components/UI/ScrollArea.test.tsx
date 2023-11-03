@@ -3,9 +3,7 @@ import UIScrollArea from "./ScrollArea";
 import { render } from "@testing-library/react";
 
 describe("UIScrollArea Component", () => {
-  it("renders with Transcription scroll area with Arabic text", async ({
-    expect,
-  }) => {
+  it("renders with Transcription scroll area with Arabic text", async () => {
     const { getAllByTestId } = render(<UIScrollArea type="Transcription" />);
 
     const elements = getAllByTestId("scroll-area-text");
@@ -17,9 +15,7 @@ describe("UIScrollArea Component", () => {
     });
   });
 
-  it("renders with Translation scroll area with English text", async ({
-    expect,
-  }) => {
+  it("renders with Translation scroll area with English text", async () => {
     const { getAllByTestId } = render(<UIScrollArea type="Translation" />);
 
     const elements = getAllByTestId("scroll-area-text");
