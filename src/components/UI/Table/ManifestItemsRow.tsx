@@ -24,9 +24,7 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
   canvas,
   isActiveCanvas,
 }) => {
-  // randomly set hasTranscription to true or false
-  // mocks a possible transcription being available
-  const hasTranscription = Math.random() >= 0.5;
+  const hasTranscription = false;
 
   return (
     <TableRow

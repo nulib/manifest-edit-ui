@@ -18,12 +18,7 @@ const UIDialog = ({
   type: "Transcription" | "Translation";
 }) => {
   // @ts-ignore
-  const defaultValue =
-    method === "Add"
-      ? undefined
-      : type === "Transcription"
-      ? mock.transcription
-      : mock.translation;
+  const defaultValue = "";
 
   return (
     <Dialog.Root>
