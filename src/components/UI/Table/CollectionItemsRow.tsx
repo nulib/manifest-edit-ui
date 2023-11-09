@@ -30,7 +30,7 @@ const UITableRow: React.FC<UITableRowProps> = ({ item }) => {
       <TableRowHeaderCell>
         <Link onClick={handleManifestClick}>
           <Box>
-            <Text size="3" weight="bold">
+            <Text size="3" weight="medium">
               {item.label}
             </Text>
           </Box>

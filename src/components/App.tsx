@@ -30,7 +30,7 @@ const App = () => {
           accentColor="indigo"
           grayColor="slate"
           panelBackground="translucent"
-          scaling="110%"
+          scaling="100%"
           radius="medium"
         >
           <Editor />

@@ -40,7 +40,7 @@ const Collection = () => {
 
   return (
     <Section size="1" pr="5" pl="5">
-      <Text size="2">
+      <Text size="3" weight="light">
         Manifests available for the <Em>{projectTitle}</Em> IIIF Collection
       </Text>
       <Box pt="4">
