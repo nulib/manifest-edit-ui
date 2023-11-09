@@ -6,6 +6,9 @@ const outDir = resolve(__dirname, "dist");
 
 // https://vitejs.dev/guide/build.html#multi-page-app
 export default defineConfig({
+  define: {
+    global: {},
+  },
   root,
   plugins: [reactRefresh()],
   build: {
