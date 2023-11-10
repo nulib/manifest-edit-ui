@@ -1,30 +1,34 @@
-import { ActionTypes, useAppContext } from "../../../context/AppContext";
+// @ts-nocheck
+
 import {
   Badge,
-  Box,
   Flex,
   TableCell,
   TableRow,
   TableRowHeaderCell,
 } from "@radix-ui/themes";
-// @ts-ignore
 import { Label, Thumbnail } from "@samvera/clover-iiif/primitives";
 
+import AnnotationCell from "./AnnotationCell";
 import { Canvas } from "@iiif/presentation-3";
 import React from "react";
-import UIDialog from "../Dialog";
-import UIScrollArea from "../ScrollArea";
 
 interface UITableRowProps {
   canvas: Canvas;
   isActiveCanvas: boolean;
+  manifestId: string;
 }
 
 const UITableCanvasRow: React.FC<UITableRowProps> = ({
   canvas,
   isActiveCanvas,
+  manifestId,
 }) => {
-  const hasTranscription = false;
+  const contentResource = canvas.items[0].items[0].body;
+  let resourceId = contentResource?.id;
+
+  if (Array.isArray(contentResource?.service) && contentResource?.service[0])
+    resourceId = contentResource?.service[0]["@id"];
 
   return (
     <TableRow
@@ -61,28 +65,18 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
         </Flex>
       </TableRowHeaderCell>
       <TableCell>
-        {hasTranscription ? (
-          <Flex direction="column" gap="3">
-            <Box>
-              <UIDialog type="Translation" method="Update" />
-            </Box>
-            <UIScrollArea type="Translation" />
-          </Flex>
-        ) : (
-          <UIDialog type="Translation" method="Add" />
-        )}
+        <AnnotationCell
+          manifestId={manifestId}
+          motivation="translation"
+          resourceId={resourceId}
+        />
       </TableCell>
       <TableCell>
-        {hasTranscription ? (
-          <Flex direction="column" gap="3">
-            <Box>
-              <UIDialog type="Transcription" method="Update" />
-            </Box>
-            <UIScrollArea type="Transcription" />
-          </Flex>
-        ) : (
-          <UIDialog type="Transcription" method="Add" />
-        )}
+        <AnnotationCell
+          manifestId={manifestId}
+          motivation="transcription"
+          resourceId={resourceId}
+        />
       </TableCell>
     </TableRow>
   );

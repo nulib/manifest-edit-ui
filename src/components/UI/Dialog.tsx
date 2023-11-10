@@ -1,29 +1,58 @@
-import {
-  Button,
-  Dialog,
-  Flex,
-  Text,
-  TextArea,
-  TextField,
-} from "@radix-ui/themes";
+import { Button, Dialog, Flex, TextArea } from "@radix-ui/themes";
+import React, { useEffect, useRef, useState } from "react";
 
-import React from "react";
-import { mock } from "../../data";
+import getApiResponse from "../../lib/getApiResponse";
+import { on } from "events";
+import { useAppContext } from "../../context/AppContext";
 
 const UIDialog = ({
+  manifestId,
   method,
+  onOpenChange,
+  resourceId,
   type,
+  defaultValue,
 }: {
-  method: "Add" | "Update";
-  type: "Transcription" | "Translation";
+  manifestId: string;
+  method: "POST" | "PUT";
+  onOpenChange: () => void;
+  resourceId: string;
+  type: "transcription" | "translation";
+  defaultValue?: string;
 }) => {
-  // @ts-ignore
-  const defaultValue = "";
+  const [open, setOpen] = useState(false);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  const { state } = useAppContext();
+  const { authToken } = state;
+
+  const handleSave = async () => {
+    const value = textAreaRef.current?.value;
+    const sortKey = `${type.toUpperCase()}#${resourceId}`;
+
+    const response = await getApiResponse({
+      route: "/annotation",
+      options: {
+        method,
+        body: JSON.stringify({
+          uri: manifestId,
+          sortKey,
+          value,
+        }),
+        headers: { Authorization: `Bearer ${authToken}` },
+      },
+    });
+
+    if (response?.value) {
+      setOpen(false);
+      onOpenChange();
+    }
+  };
 
   return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <Button variant={method === "Update" ? "soft" : "solid"}>
+    <Dialog.Root onOpenChange={onOpenChange} open={open}>
+      <Dialog.Trigger onClick={() => setOpen(!open)}>
+        <Button variant={method === "PUT" ? "soft" : "solid"}>
           {method} {type}
         </Button>
       </Dialog.Trigger>
@@ -36,19 +65,16 @@ const UIDialog = ({
               placeholder={`Add ${type.toLowerCase()}`}
               style={{ height: "300px", maxHeight: "50vh" }}
               size="2"
+              ref={textAreaRef}
             />
           </label>
         </Flex>
 
         <Flex gap="3" mt="4" justify="end">
-          <Dialog.Close>
-            <Button variant="soft" color="gray">
-              Cancel
-            </Button>
-          </Dialog.Close>
-          <Dialog.Close>
-            <Button>Save</Button>
-          </Dialog.Close>
+          <Button variant="soft" color="gray" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+          <Button onClick={handleSave}>Save</Button>
         </Flex>
       </Dialog.Content>
     </Dialog.Root>

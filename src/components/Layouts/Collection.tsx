@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { ManifestEditorManifest } from "../../types/manifest-editor";
 import UITable from "../UI/Table/Table";
 import UITableCollectionItemsRow from "../UI/Table/CollectionItemsRow";
+import getApiResponse from "../../lib/getApiResponse";
 import { projectTitle } from "../../data";
 import { useAppContext } from "../../context/AppContext";
 
@@ -23,20 +24,17 @@ const Collection = () => {
   const { authToken } = state;
 
   useEffect(() => {
-    const baseUrl =
-      "https://67qdcv50f4.execute-api.us-east-1.amazonaws.com/prod";
-
-    fetch(`${baseUrl}/manifests`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${authToken}` },
-      redirect: "follow",
-    })
-      .then(async (response) => await new Response(response.body).json())
-      .then((result) => setManifests(result))
-      .catch((error) => console.log("error", error));
+    (async () => {
+      const response = await getApiResponse({
+        route: "/manifests",
+        options: {
+          method: "GET",
+          headers: { Authorization: `Bearer ${authToken}` },
+        },
+      });
+      setManifests(response);
+    })();
   }, []);
-
-  if (!manifests) return null;
 
   return (
     <Section size="1" pr="5" pl="5">

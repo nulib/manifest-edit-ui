@@ -18,9 +18,10 @@ import UITable from "../UI/Table/Table";
 import UITableManifestItemsRow from "../UI/Table/ManifestItemsRow";
 import { data } from "../../data";
 import { useAppContext } from "../../context/AppContext";
+import { Manifest } from "@iiif/presentation-3";
 
 const Manifest = () => {
-  const [manifest, setManifest] = useState();
+  const [manifest, setManifest] = useState<Manifest>();
   const [activeCanvas, setActiveCanvas] = useState<String>();
 
   const { state } = useAppContext();
@@ -105,6 +106,7 @@ const Manifest = () => {
                     <UITableManifestItemsRow
                       canvas={item}
                       isActiveCanvas={item.id === activeCanvas}
+                      manifestId={manifest.id}
                       key={item.id}
                     />
                   ))
