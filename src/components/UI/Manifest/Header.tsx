@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Heading, Switch, Text } from "@radix-ui/themes";
+import { Flex, Heading, Switch, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 
 import { ManifestEditorManifest } from "../../../types/manifest-editor";
@@ -11,12 +11,11 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
 
   const [metadata, setMetadata] = useState<ManifestEditorManifest>();
 
+  /**
+   * Retrieve default values of Manifest
+   */
   useEffect(() => {
-    (async () => updateMetdata())();
-  }, [activeManifest]);
-
-  const updateMetdata = async () => {
-    const response = await getApiResponse({
+    getApiResponse({
       route: "/item",
       options: {
         method: "POST",
@@ -26,13 +25,14 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
         }),
         headers: { Authorization: `Bearer ${authToken}` },
       },
-    });
+    }).then((response) => setMetadata(response));
+  }, [activeManifest]);
 
-    setMetadata(response);
-  };
-
-  const handlePublicChange = async (checked: boolean) => {
-    const response = await getApiResponse({
+  /**
+   * Update `public` boolean of Manifest and reset metadata
+   */
+  const handlePublicChange = (checked: boolean) => {
+    getApiResponse({
       route: "/metadata",
       options: {
         method: "PUT",
@@ -42,9 +42,7 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
         }),
         headers: { Authorization: `Bearer ${authToken}` },
       },
-    });
-
-    if (response?.uri) setMetadata(response);
+    }).then((response) => setMetadata(response));
   };
 
   if (!metadata) return null;
