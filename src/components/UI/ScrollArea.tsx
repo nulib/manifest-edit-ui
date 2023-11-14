@@ -3,11 +3,11 @@ import { Flex, ScrollArea, Text } from "@radix-ui/themes";
 import React from "react";
 
 const UIScrollArea = ({
-  type,
   value,
+  dir,
 }: {
-  type: "transcription" | "translation";
   value: string;
+  dir: "ltr" | "rtl";
 }) => {
   return (
     <ScrollArea
@@ -19,7 +19,7 @@ const UIScrollArea = ({
     >
       <Flex direction="column" gap="2">
         {value.split(`\n\n`).map((paragraph: string, index) => (
-          <Text key={index} as="p" size="2" data-testid="scroll-area-text">
+          <Text key={index} as="p" dir={dir} data-testid="scroll-area-text">
             {paragraph}
           </Text>
         ))}

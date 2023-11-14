@@ -1,10 +1,10 @@
 import "@aws-amplify/ui-react/styles.css";
 
-import Collection from "./Layouts/Collection";
-import Header from "./Header";
-import Manifest from "./Layouts/Manifest";
+import Collection from "components/Layouts/Collection";
+import Header from "components/Header";
+import Manifest from "components/Layouts/Manifest";
 import React from "react";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "context/AppContext";
 
 const Editor = () => {
   const { state } = useAppContext();

@@ -1,5 +1,5 @@
-import awsExports from "../aws-exports";
-import { useAppContext } from "../context/AppContext";
+import awsExports from "aws-exports";
+import { useAppContext } from "context/AppContext";
 
 interface IGetApiResponse {
   route: "/annotation" | "/item" | "/manifests" | "/metadata";

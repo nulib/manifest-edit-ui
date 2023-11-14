@@ -1,6 +1,7 @@
 import { defineConfig } from "vitest/config";
 import reactRefresh from "@vitejs/plugin-react-refresh";
 import { resolve } from "path";
+import tsconfigPaths from "vite-tsconfig-paths";
 const root = resolve(__dirname, "src/pages");
 const outDir = resolve(__dirname, "dist");
 
@@ -10,7 +11,7 @@ export default defineConfig({
     global: {},
   },
   root,
-  plugins: [reactRefresh()],
+  plugins: [reactRefresh(), tsconfigPaths()],
   build: {
     outDir,
     emptyOutDir: true,

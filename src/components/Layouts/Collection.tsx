@@ -10,12 +10,12 @@ import {
 } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 
-import { ManifestEditorManifest } from "../../types/manifest-editor";
-import UITable from "../UI/Table/Table";
-import UITableCollectionItemsRow from "../UI/Table/CollectionItemsRow";
-import getApiResponse from "../../lib/getApiResponse";
-import { projectTitle } from "../../data";
-import { useAppContext } from "../../context/AppContext";
+import { ManifestEditorManifest } from "types/manifest-editor";
+import UITable from "components/UI/Table/Table";
+import UITableCollectionItemsRow from "components/UI/Table/CollectionItemsRow";
+import getApiResponse from "lib/getApiResponse";
+import { projectTitle } from "data";
+import { useAppContext } from "context/AppContext";
 
 const Collection = () => {
   const [manifests, setManifests] = useState<ManifestEditorManifest[]>([]);

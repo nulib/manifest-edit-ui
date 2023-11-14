@@ -1,10 +1,10 @@
 import { Box, Flex } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 
-import UIDialog from "../Dialog";
-import UIScrollArea from "../ScrollArea";
-import getApiResponse from "../../../lib/getApiResponse";
-import { useAppContext } from "../../../context/AppContext";
+import UIDialog from "components/UI/Dialog";
+import UIScrollArea from "components/UI/ScrollArea";
+import getApiResponse from "lib/getApiResponse";
+import { useAppContext } from "context/AppContext";
 
 interface AnnotationCellProps {
   manifestId: string;
@@ -25,6 +25,7 @@ const UITableAnnotationCell: React.FC<AnnotationCellProps> = ({
 
   // creates sortKey, ex: TRANSCRIPTION#https://resource.uri/id/info.json
   const sortKey = `${motivation.toUpperCase()}#${resourceId}`;
+  const dir = motivation === "translation" ? "rtl" : "ltr";
 
   useEffect(() => {
     (async () => {
@@ -63,7 +64,7 @@ const UITableAnnotationCell: React.FC<AnnotationCellProps> = ({
           method={value ? "PUT" : "POST"}
         />
       </Box>
-      {value && <UIScrollArea type={motivation} value={value} />}
+      {value && <UIScrollArea dir={dir} value={value} />}
     </Flex>
   );
 };

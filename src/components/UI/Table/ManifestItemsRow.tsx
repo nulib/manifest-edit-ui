@@ -9,7 +9,7 @@ import {
 } from "@radix-ui/themes";
 import { Label, Thumbnail } from "@samvera/clover-iiif/primitives";
 
-import AnnotationCell from "./AnnotationCell";
+import AnnotationCell from "components/UI/Table/AnnotationCell";
 import { Canvas } from "@iiif/presentation-3";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import { ActionTypes, useAppContext } from "../../../context/AppContext";
+import { ActionTypes, useAppContext } from "context/AppContext";
 import {
   Badge,
   Box,
@@ -11,7 +11,7 @@ import {
 } from "@radix-ui/themes";
 import React, { MouseEventHandler } from "react";
 
-import { ManifestEditorManifest } from "../../../types/manifest-editor";
+import { ManifestEditorManifest } from "types/manifest-editor";
 
 interface UITableRowProps {
   item: ManifestEditorManifest;

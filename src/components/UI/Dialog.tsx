@@ -1,9 +1,18 @@
-import { Button, Dialog, Flex, TextArea } from "@radix-ui/themes";
-import React, { useEffect, useRef, useState } from "react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Dialog,
+  Flex,
+  Popover,
+  Text,
+  TextArea,
+} from "@radix-ui/themes";
+import React, { useRef, useState } from "react";
 
-import getApiResponse from "../../lib/getApiResponse";
-import { on } from "events";
-import { useAppContext } from "../../context/AppContext";
+import { EyeClosedIcon } from "@radix-ui/react-icons";
+import getApiResponse from "lib/getApiResponse";
+import { useAppContext } from "context/AppContext";
 
 const UIDialog = ({
   manifestId,
@@ -49,32 +58,52 @@ const UIDialog = ({
     }
   };
 
+  const handleClear = () => {
+    textAreaRef.current!.value = "";
+  };
+
+  const dir = type === "translation" ? "rtl" : "ltr";
+  const verb = method === "PUT" ? "Edit" : "Add";
+
   return (
     <Dialog.Root onOpenChange={onOpenChange} open={open}>
       <Dialog.Trigger onClick={() => setOpen(!open)}>
-        <Button variant={method === "PUT" ? "soft" : "solid"}>
-          {method} {type}
+        <Button
+          variant={method === "PUT" ? "soft" : "solid"}
+          style={{ whiteSpace: "nowrap" }}
+        >
+          {verb} {type}
         </Button>
       </Dialog.Trigger>
       <Dialog.Content style={{ maxWidth: 600 }}>
         <Flex direction="column" gap="3">
           <label>
-            <Dialog.Title>Edit {type}</Dialog.Title>
+            <Dialog.Title>
+              {verb} {type}
+            </Dialog.Title>
             <TextArea
               defaultValue={defaultValue}
-              placeholder={`Add ${type.toLowerCase()}`}
+              placeholder={`${verb} ${type.toLowerCase()}`}
               style={{ height: "300px", maxHeight: "50vh" }}
+              dir={dir}
               size="2"
               ref={textAreaRef}
             />
           </label>
         </Flex>
 
-        <Flex gap="3" mt="4" justify="end">
+        <Flex gap="3" mt="4" justify="between">
           <Button variant="soft" color="gray" onClick={() => setOpen(false)}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save</Button>
+          <Box>
+            <Flex gap="3" justify="between">
+              {/* <Button variant="soft" onClick={handleClear}>
+                Clear
+              </Button> */}
+              <Button onClick={handleSave}>Save</Button>
+            </Flex>
+          </Box>
         </Flex>
       </Dialog.Content>
     </Dialog.Root>

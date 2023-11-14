@@ -10,15 +10,15 @@ import React, { useEffect, useState } from "react";
 
 // @ts-ignore
 import CloverViewer from "@samvera/clover-iiif/viewer";
-import UITable from "../UI/Table/Table";
-import UITableManifestItemsRow from "../UI/Table/ManifestItemsRow";
-import { useAppContext } from "../../context/AppContext";
+import UITable from "components/UI/Table/Table";
+import UITableManifestItemsRow from "components/UI/Table/ManifestItemsRow";
+import { useAppContext } from "context/AppContext";
 import { Manifest } from "@iiif/presentation-3";
 import {
   cloverViewerCustomTheme,
   cloverViewerOptions,
-} from "../../lib/vendor/@samvera/clover-iiif";
-import ManifestHeader from "../UI/Manifest/Header";
+} from "lib/vendor/@samvera/clover-iiif";
+import ManifestHeader from "components/UI/Manifest/Header";
 
 const Manifest = () => {
   const [manifest, setManifest] = useState<Manifest>();

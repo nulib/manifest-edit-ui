@@ -1,7 +1,7 @@
 import { Box, Flex, Heading } from "@radix-ui/themes";
 
 import React from "react";
-import { projectTitle } from "../../data";
+import { projectTitle } from "data";
 
 const authenticatorComponents = {
   Header() {

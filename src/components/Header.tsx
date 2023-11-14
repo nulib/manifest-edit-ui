@@ -1,4 +1,4 @@
-import { ActionTypes, useAppContext } from "../context/AppContext";
+import { ActionTypes, useAppContext } from "context/AppContext";
 import {
   Box,
   Button,
@@ -12,7 +12,7 @@ import {
 import { CaretDownIcon, ListBulletIcon } from "@radix-ui/react-icons";
 import React, { MouseEventHandler } from "react";
 
-import { projectTitle } from "../data";
+import { projectTitle } from "data";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Header = () => {

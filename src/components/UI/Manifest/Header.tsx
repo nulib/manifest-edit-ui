@@ -1,9 +1,9 @@
 import { Flex, Heading, Switch, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 
-import { ManifestEditorManifest } from "../../../types/manifest-editor";
-import getApiResponse from "../../../lib/getApiResponse";
-import { useAppContext } from "../../../context/AppContext";
+import { ManifestEditorManifest } from "types/manifest-editor";
+import getApiResponse from "lib/getApiResponse";
+import { useAppContext } from "context/AppContext";
 
 const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
   const { state } = useAppContext();
