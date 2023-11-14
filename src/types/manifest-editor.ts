@@ -3,6 +3,7 @@ interface ManifestEditorManifest {
   label: string;
   provider: string;
   public: boolean;
+  sortKey?: string;
 }
 
 export type { ManifestEditorManifest };
