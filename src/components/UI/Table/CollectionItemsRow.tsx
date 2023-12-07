@@ -38,7 +38,7 @@ const UITableRow: React.FC<UITableRowProps> = ({ item }) => {
       </TableRowHeaderCell>
       <TableCell>{item.provider}</TableCell>
       <TableCell>
-        {item.public ? (
+        {item.publicStatus ? (
           <Badge>Public</Badge>
         ) : (
           <Badge color="crimson">Private</Badge>

@@ -29,7 +29,7 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
   }, [activeManifest]);
 
   /**
-   * Update `public` boolean of Manifest and reset metadata
+   * Update `publicStatus` boolean of Manifest and reset metadata
    */
   const handlePublicChange = (checked: boolean) => {
     getApiResponse({
@@ -38,7 +38,7 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
         method: "PUT",
         body: JSON.stringify({
           ...metadata,
-          public: checked,
+          publicStatus: checked,
         }),
         headers: { Authorization: `Bearer ${authToken}` },
       },
@@ -57,7 +57,7 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
         <Flex gap="2">
           <Switch
             size="3"
-            defaultChecked={metadata?.public}
+            defaultChecked={metadata?.publicStatus}
             onCheckedChange={handlePublicChange}
           />
           Public?
