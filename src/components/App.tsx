@@ -7,6 +7,7 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import Editor from "components/Editor";
 import React from "react";
 import { Theme, Box, Flex, Heading } from "@radix-ui/themes";
+// @ts-ignore
 import { authenticatorComponents } from "components/Vendor/Amplify/Authenticator";
 import awsExports from "aws-exports";
 import { projectTitle } from "data";

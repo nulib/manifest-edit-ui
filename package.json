@@ -15,7 +15,8 @@
     "@samvera/clover-iiif": "^2.2.0",
     "aws-amplify": "^5.3.11",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sonner": "^1.2.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",

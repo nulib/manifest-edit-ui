@@ -1,18 +1,11 @@
 import { ActionTypes, useAppContext } from "context/AppContext";
-import {
-  Box,
-  Button,
-  DropdownMenu,
-  Em,
-  Flex,
-  Heading,
-  Link,
-  Text,
-} from "@radix-ui/themes";
-import { CaretDownIcon, ListBulletIcon } from "@radix-ui/react-icons";
+import { Box, Button, DropdownMenu, Flex, Heading } from "@radix-ui/themes";
 import React, { MouseEventHandler } from "react";
 
+import { CaretDownIcon } from "@radix-ui/react-icons";
 import { projectTitle } from "data";
+import { toast } from "sonner";
+import { toastDefaults } from "lib/vendor/sonner";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Header = () => {
@@ -21,6 +14,13 @@ const Header = () => {
 
   const handleViewCollection: MouseEventHandler<HTMLButtonElement> = () => {
     dispatch({ type: ActionTypes.SET_SCREEN, payload: "Collection" });
+  };
+
+  const handlePublish: MouseEventHandler<HTMLDivElement> = () => {
+    toast(`Publishing Collection`, {
+      description: `The ${projectTitle} Collection will soon be updated.`,
+      ...toastDefaults,
+    });
   };
 
   return (
@@ -43,7 +43,9 @@ const Header = () => {
                   <DropdownMenu.Item>Mirador</DropdownMenu.Item>
                 </DropdownMenu.SubContent>
               </DropdownMenu.Sub>
-              <DropdownMenu.Item>Publish Collection</DropdownMenu.Item>
+              <DropdownMenu.Item onClick={handlePublish}>
+                Publish Collection
+              </DropdownMenu.Item>
               <DropdownMenu.Separator />
               <DropdownMenu.Label style={{ fontSize: "0.7em" }}>
                 Logged in as {user.username}
