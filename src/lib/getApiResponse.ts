@@ -1,8 +1,7 @@
 import awsExports from "aws-exports";
-import { useAppContext } from "context/AppContext";
 
 interface IGetApiResponse {
-  route: "/annotation" | "/item" | "/manifests" | "/metadata";
+  route: "/annotation" | "/item" | "/manifests" | "/metadata" | "/publish";
   options?: RequestInit;
 }
 
@@ -11,6 +10,7 @@ export default async ({ route, options }: IGetApiResponse) => {
   try {
     return await fetch(`${API_GATEWAY_ENDPOINT}${route}`, options)
       .then(async (response) => {
+        if (route === "/publish") return response;
         if (response?.status !== 200) return;
         return await new Response(response.body).json();
       })

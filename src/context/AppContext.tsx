@@ -7,6 +7,7 @@ interface AppState {
   activeCanvas?: string;
   activeManifest?: string;
   authToken?: string;
+  collection?: string;
 }
 
 enum ActionTypes {
@@ -65,9 +66,12 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   // @ts-ignore
   const authToken = user?.signInUserSession.idToken.jwtToken;
+  const collection = "https://d27rpn9w26s356.cloudfront.net/collection.json";
 
   return (
-    <AppContext.Provider value={{ state: { ...state, authToken }, dispatch }}>
+    <AppContext.Provider
+      value={{ state: { ...state, authToken, collection }, dispatch }}
+    >
       {children}
     </AppContext.Provider>
   );

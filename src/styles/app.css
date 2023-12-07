@@ -10,3 +10,16 @@ p[dir="ltr"] {
 textarea[dir="ltr"] {
   text-align: right;
 }
+
+.toastCallout {
+  min-width: 400px;
+}
+
+.toastCallout svg {
+  margin-top: 7px;
+}
+
+.toastError {
+  background-color: var(--crimson-3);
+  color: var(--crimson-11);
+}
