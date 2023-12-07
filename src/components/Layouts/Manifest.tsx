@@ -53,7 +53,7 @@ const Manifest = () => {
       {manifest && (
         <Section size="1" pr="5" pl="5">
           <Box pb="4">
-            <ManifestHeader activeManifest={activeManifest} />
+            <ManifestHeader activeManifest={activeManifest as string} />
           </Box>
           <UITable>
             <TableHeader>
