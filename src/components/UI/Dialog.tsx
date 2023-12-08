@@ -62,7 +62,7 @@ const UIDialog = ({
     textAreaRef.current!.value = "";
   };
 
-  const dir = type === "translation" ? "rtl" : "ltr";
+  const dir = type === "transcription" ? "rtl" : "ltr";
   const verb = method === "PUT" ? "Edit" : "Add";
 
   return (

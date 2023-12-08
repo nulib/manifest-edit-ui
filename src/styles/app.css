@@ -8,6 +8,10 @@ p[dir="ltr"] {
 }
 
 textarea[dir="ltr"] {
+  text-align: left;
+}
+
+textarea[dir="rtl"] {
   text-align: right;
 }
 
