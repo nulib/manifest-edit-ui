@@ -3,6 +3,7 @@ import { Box, Button, DropdownMenu, Flex, Heading } from "@radix-ui/themes";
 import React, { MouseEventHandler } from "react";
 
 import { CaretDownIcon } from "@radix-ui/react-icons";
+import UIAddManifest from "components/UI/AddManifest";
 import getApiResponse from "lib/getApiResponse";
 import { projectTitle } from "data";
 import { toast } from "sonner";
@@ -109,6 +110,8 @@ const Header = () => {
               </DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
+
+          <UIAddManifest />
           <Button onClick={handleViewCollection}>Available Manifests</Button>
         </Flex>
       </Flex>

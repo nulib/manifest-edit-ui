@@ -11,6 +11,17 @@ textarea[dir="ltr"] {
   text-align: right;
 }
 
+button.addManifest {
+  background: transparent;
+  color: var(--colors-primary);
+  font-weight: 400;
+}
+
+button.addManifest:hover {
+  background-color: var(--accent-9);
+  color: var(--accent-9-contrast);
+}
+
 .toastCallout {
   min-width: 400px;
 }

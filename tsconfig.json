@@ -15,10 +15,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
-  },
-  "paths": {
-    "*": ["./*"]
+    "jsx": "react",
+    "paths": {
+      "*": ["./*"]
+    }
   },
   "include": ["/"]
 }

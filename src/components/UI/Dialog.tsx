@@ -98,9 +98,6 @@ const UIDialog = ({
           </Button>
           <Box>
             <Flex gap="3" justify="between">
-              {/* <Button variant="soft" onClick={handleClear}>
-                Clear
-              </Button> */}
               <Button onClick={handleSave}>Save</Button>
             </Flex>
           </Box>
