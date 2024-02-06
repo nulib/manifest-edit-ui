@@ -9,14 +9,13 @@ import React from "react";
 import { Theme, Box, Flex, Heading } from "@radix-ui/themes";
 // @ts-ignore
 import { authenticatorComponents } from "components/Vendor/Amplify/Authenticator";
-import awsExports from "aws-exports";
 import { projectTitle } from "data";
 
 Amplify.configure({
   Auth: {
-    region: awsExports.REGION,
-    userPoolId: awsExports.USER_POOL_ID,
-    userPoolWebClientId: awsExports.USER_POOL_APP_CLIENT_ID,
+    region: import.meta.env.VITE_REGION,
+    userPoolId: import.meta.env.VITE_USER_POOL_ID,
+    userPoolWebClientId: import.meta.env.VITE_USER_POOL_APP_CLIENT_ID,
   },
 });
 
