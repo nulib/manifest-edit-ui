@@ -15,4 +15,8 @@ npm run dev
 ```
 - Local:  http://localhost:5173/
 
+**Configuration**
+
+- rename the `.env.example` file to `.env` and replace with your own values.
+
 ## License

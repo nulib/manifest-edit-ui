@@ -48,7 +48,7 @@ const UIAddManifest = () => {
         const label = getLabelAsString(manifest?.label);
 
         const response = await getApiResponse({
-          route: "/annotation",
+          route: "/metadata",
           options: {
             method: "POST",
             body: JSON.stringify({
