@@ -17,6 +17,6 @@ npm run dev
 
 **Configuration**
 
-- rename the `.env.example` file to `.env` and replace with your own values.
+- Replace the dummy values in `.env.example` with your own configuration values and rename the file to `.env.local` (for development) or `.env` (for production deployment). 
 
 ## License
