@@ -19,6 +19,7 @@ import {
   cloverViewerOptions,
 } from "lib/vendor/@samvera/clover-iiif";
 import ManifestHeader from "components/UI/Manifest/Header";
+import { convertPresentation2 } from "@iiif/parser/presentation-2";
 
 const Manifest = () => {
   const [manifest, setManifest] = useState<Manifest>();
@@ -31,7 +32,10 @@ const Manifest = () => {
     if (activeManifest)
       fetch(activeManifest)
         .then((response) => response.json())
-        .then((data) => setManifest(data))
+        .then((data) => {
+          const manifestJson = convertPresentation2(data) as Manifest;
+          setManifest(manifestJson);
+        })
         .catch((error) => {
           console.error(`Error fetching ${activeManifest}`, error);
         });
