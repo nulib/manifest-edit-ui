@@ -62,11 +62,17 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     screen: "Collection",
   });
 
+  /**
+   * get the authToken from the useAuthenticator() hook
+   */
   const { user } = useAuthenticator();
-
-  // @ts-ignore
   const authToken = user?.signInUserSession.idToken.jwtToken;
-  const collection = "https://d27rpn9w26s356.cloudfront.net/collection.json";
+
+  /**
+   * get IIIF base url from vite environment variables
+   */
+  const iiifBaseUrl = import.meta.env.VITE_IIIF_BASE_URL;
+  const collection = `${iiifBaseUrl}/collection.json`;
 
   return (
     <AppContext.Provider
