@@ -5,6 +5,7 @@ import React, { MouseEventHandler } from "react";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import UIAddManifest from "components/UI/AddManifest";
 import getApiResponse from "lib/getApiResponse";
+import { isAdminUser } from "lib/getUser";
 import { projectTitle } from "data";
 import { toast } from "sonner";
 import { toastDefaults } from "lib/vendor/sonner";
@@ -14,6 +15,8 @@ const Header = () => {
   const { user, signOut } = useAuthenticator();
   const { state, dispatch } = useAppContext();
   const { authToken, collection } = state;
+
+  const adminUser = isAdminUser(user);
 
   const handleViewCollection: MouseEventHandler<HTMLButtonElement> = () => {
     dispatch({ type: ActionTypes.SET_SCREEN, payload: "Collection" });
@@ -98,9 +101,11 @@ const Header = () => {
                   </DropdownMenu.Item>
                 </DropdownMenu.SubContent>
               </DropdownMenu.Sub>
-              <DropdownMenu.Item onClick={handlePublish}>
-                Publish Collection
-              </DropdownMenu.Item>
+              {adminUser && (
+                <DropdownMenu.Item onClick={handlePublish}>
+                  Publish Collection
+                </DropdownMenu.Item>
+              )}
               <DropdownMenu.Separator />
               <DropdownMenu.Label style={{ fontSize: "0.7em" }}>
                 Logged in as {user.username}
