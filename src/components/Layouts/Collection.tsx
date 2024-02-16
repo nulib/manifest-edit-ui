@@ -1,6 +1,7 @@
 import {
   Box,
   Em,
+  Flex,
   Section,
   TableBody,
   TableColumnHeaderCell,
@@ -48,10 +49,13 @@ const Collection = () => {
               <TableColumnHeaderCell>Label</TableColumnHeaderCell>
               <TableColumnHeaderCell>Provider</TableColumnHeaderCell>
               <TableColumnHeaderCell>Status</TableColumnHeaderCell>
+              <TableColumnHeaderCell>
+                <span style={{ visibility: "hidden" }}>Actions</span>
+              </TableColumnHeaderCell>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {manifests.map((item) => (
+            {manifests?.map((item) => (
               <UITableCollectionItemsRow item={item} key={item.uri} />
             ))}
           </TableBody>

@@ -105,7 +105,7 @@ const Header = () => {
               <DropdownMenu.Label style={{ fontSize: "0.7em" }}>
                 Logged in as {user.username}
               </DropdownMenu.Label>
-              <DropdownMenu.Item color="crimson" onClick={signOut}>
+              <DropdownMenu.Item color="ruby" onClick={signOut}>
                 Logout
               </DropdownMenu.Item>
             </DropdownMenu.Content>

@@ -13,6 +13,6 @@ export const toastOptions = {
 };
 
 export const toastDefaults: ExternalToast = {
-  duration: 7000,
+  duration: 5000,
   position: "bottom-left",
 };
