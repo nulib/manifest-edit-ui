@@ -1,3 +1,4 @@
+import { ActionTypes, useAppContext } from "context/AppContext";
 import {
   Button,
   Dialog,
@@ -15,11 +16,11 @@ import getApiResponse from "lib/getApiResponse";
 import { projectTitle } from "data";
 import { toast } from "sonner";
 import { toastDefaults } from "lib/vendor/sonner";
-import { useAppContext } from "context/AppContext";
+import { v4 as uuidv4 } from "uuid";
 
 const Required = () => {
   return (
-    <Strong color="crimson" style={{ color: "var(--crimson-9)" }}>
+    <Strong color="ruby" style={{ color: "var(--ruby-9)" }}>
       *
     </Strong>
   );
@@ -29,7 +30,7 @@ const UIAddManifest = () => {
   const [provider, setProvider] = useState<string>();
   const [uri, setUri] = useState<string>();
 
-  const { state } = useAppContext();
+  const { dispatch, state } = useAppContext();
   const { authToken } = state;
 
   const handleAddManifest = async () => {
@@ -64,9 +65,16 @@ const UIAddManifest = () => {
 
         if (response?.uri) {
           toast.dismiss();
-          toast.success(`Success`, {
-            description: `Manifest added successfully.`,
+          toast.success(`Added Manifest`, {
+            description: label,
             ...toastDefaults,
+          });
+
+          dispatch({ type: ActionTypes.SET_SCREEN, payload: "Collection" });
+          dispatch({ type: ActionTypes.SET_SCREEN_ID, payload: uuidv4() });
+          dispatch({
+            type: ActionTypes.SET_ACTIVE_MANIFEST,
+            payload: undefined,
           });
         }
       }

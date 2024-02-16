@@ -10,13 +10,13 @@ import { useAppContext } from "context/AppContext";
 
 const Editor = () => {
   const { state } = useAppContext();
-  const { screen } = state;
+  const { screen, screenId } = state;
 
   return (
     <div>
       <Header />
       <main>
-        {screen === "Collection" && <Collection />}
+        {screen === "Collection" && <Collection key={screenId} />}
         {screen === "Manifest" && <Manifest />}
         <Toaster toastOptions={toastOptions} />
       </main>

@@ -1,6 +1,7 @@
-import { Flex, Heading, Switch, Text } from "@radix-ui/themes";
+import { Box, Flex, Heading, Switch, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 
+import DeleteManifest from "components/UI/DeleteManifest";
 import { ManifestEditorManifest } from "types/manifest-editor";
 import getApiResponse from "lib/getApiResponse";
 import { useAppContext } from "context/AppContext";
@@ -54,13 +55,22 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
         <Text size="2">({metadata.provider})</Text>
       </Flex>
       <Text as="label" size="2">
-        <Flex gap="2">
-          <Switch
-            size="3"
-            defaultChecked={metadata?.publicStatus}
-            onCheckedChange={handlePublicChange}
+        <Flex gap="5" align="center">
+          <Box>
+            <Flex gap="2">
+              <Switch
+                size="3"
+                defaultChecked={metadata?.publicStatus}
+                onCheckedChange={handlePublicChange}
+              />
+              Public?
+            </Flex>
+          </Box>
+          <DeleteManifest
+            disabled={metadata?.publicStatus}
+            label={metadata.label}
+            uri={metadata.uri}
           />
-          Public?
         </Flex>
       </Text>
     </Flex>
