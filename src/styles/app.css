@@ -28,6 +28,7 @@ button.addManifest:hover {
 
 .toastCallout {
   min-width: 400px;
+  background-color: var(--accent-3) !important;
 }
 
 .toastCallout svg {
@@ -35,6 +36,6 @@ button.addManifest:hover {
 }
 
 .toastError {
-  background-color: var(--crimson-3);
-  color: var(--crimson-11);
+  background-color: var(--ruby-3) !important;
+  color: var(--ruby-11);
 }
