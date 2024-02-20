@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 
-p[dir="ltr"] {
+p[dir="rtl"] {
   text-align: right;
 }
 
