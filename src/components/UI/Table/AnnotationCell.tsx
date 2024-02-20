@@ -25,7 +25,7 @@ const UITableAnnotationCell: React.FC<AnnotationCellProps> = ({
 
   // creates sortKey, ex: TRANSCRIPTION#https://resource.uri/id/info.json
   const sortKey = `${motivation.toUpperCase()}#${resourceId}`;
-  const dir = motivation === "translation" ? "rtl" : "ltr";
+  const dir = motivation === "translation" ? "ltr" : "rtl";
 
   useEffect(() => {
     (async () => {
