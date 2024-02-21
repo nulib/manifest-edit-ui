@@ -78,6 +78,13 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
           resourceId={resourceId}
         />
       </TableCell>
+      <TableCell>
+        <AnnotationCell
+          manifestId={manifestId}
+          motivation="note"
+          resourceId={resourceId}
+        />
+      </TableCell>
     </TableRow>
   );
 };

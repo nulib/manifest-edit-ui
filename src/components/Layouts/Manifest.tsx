@@ -65,6 +65,7 @@ const Manifest = () => {
                 <TableColumnHeaderCell>Canvas</TableColumnHeaderCell>
                 <TableColumnHeaderCell>Translation</TableColumnHeaderCell>
                 <TableColumnHeaderCell>Transcription</TableColumnHeaderCell>
+                <TableColumnHeaderCell>Notes</TableColumnHeaderCell>
               </TableRow>
             </TableHeader>
             <TableBody>
