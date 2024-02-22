@@ -24,7 +24,10 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
           uri: activeManifest,
           sortKey: "METADATA",
         }),
-        headers: { Authorization: `Bearer ${authToken}` },
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
       },
     }).then((response) => setMetadata(response));
   }, [activeManifest]);
@@ -41,7 +44,10 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
           ...metadata,
           publicStatus: checked,
         }),
-        headers: { Authorization: `Bearer ${authToken}` },
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
       },
     }).then((response) => setMetadata(response));
   };
