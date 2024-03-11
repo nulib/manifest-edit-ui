@@ -40,7 +40,10 @@ const UIDeleteManifest = ({
             sortKey: "METADATA",
             uri,
           }),
-          headers: { Authorization: `Bearer ${authToken}` },
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
         },
       });
 

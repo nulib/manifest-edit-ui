@@ -37,7 +37,10 @@ const UITableAnnotationCell: React.FC<AnnotationCellProps> = ({
             uri: manifestId,
             sortKey,
           }),
-          headers: { Authorization: `Bearer ${authToken}` },
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
         },
       });
 

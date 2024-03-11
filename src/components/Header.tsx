@@ -28,7 +28,10 @@ const Header = () => {
       route: "/publish",
       options: {
         method: "POST",
-        headers: { Authorization: `Bearer ${authToken}` },
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
       },
     });
 

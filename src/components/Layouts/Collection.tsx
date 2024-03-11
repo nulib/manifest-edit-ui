@@ -30,7 +30,10 @@ const Collection = () => {
         route: "/manifests",
         options: {
           method: "GET",
-          headers: { Authorization: `Bearer ${authToken}` },
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
         },
       });
       setManifests(response);
