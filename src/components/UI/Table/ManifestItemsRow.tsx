@@ -59,7 +59,7 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
           />
           {isActiveCanvas && (
             <Badge size="1" variant="outline">
-              Active in Viewer
+              Active
             </Badge>
           )}
         </Flex>

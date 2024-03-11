@@ -1,6 +1,7 @@
-import { Flex, ScrollArea, Text } from "@radix-ui/themes";
+import { ScrollArea, Text } from "@radix-ui/themes";
 
 import React from "react";
+import useMarkdown from "hooks/useMarkdown";
 
 const UIScrollArea = ({
   value,
@@ -9,21 +10,19 @@ const UIScrollArea = ({
   value: string;
   dir: "ltr" | "rtl";
 }) => {
+  const { jsx } = useMarkdown(value);
+
   return (
     <ScrollArea
       radius="large"
       scrollbars="vertical"
       size="2"
-      style={{ height: 120 }}
+      style={{ height: 140 }}
       type="hover"
     >
-      <Flex direction="column" gap="2">
-        {value.split(`\n\n`).map((paragraph: string, index) => (
-          <Text key={index} as="p" dir={dir} data-testid="scroll-area-text">
-            {paragraph}
-          </Text>
-        ))}
-      </Flex>
+      <Text as="div" data-testid="scroll-area-text" dir={dir}>
+        {jsx}
+      </Text>
     </ScrollArea>
   );
 };
