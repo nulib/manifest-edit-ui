@@ -48,7 +48,10 @@ const UIDialog = ({
           sortKey,
           value,
         }),
-        headers: { Authorization: `Bearer ${authToken}` },
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
       },
     });
 
