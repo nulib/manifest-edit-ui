@@ -60,4 +60,44 @@ describe("convertMarkdownToHtml", () => {
 </li>
 </ul>`);
   });
+
+  it("should convert tables to html", async () => {
+    const html = await convertMarkdownToHtml("| a | b |\n|---|---|\n| c | d |");
+    expect(html.trim()).toBe(
+      `<table><thead><tr><th>a</th><th>b</th></tr></thead><tbody><tr><td>c</td><td>d</td></tr></tbody></table>`
+    );
+  });
+
+  it("should convert strikethrough to html", async () => {
+    const html = await convertMarkdownToHtml("~~strikethrough~~");
+    expect(html).toBe(`<p><del>strikethrough</del></p>`);
+  });
+
+  it("should handle footnotes", async () => {
+    const html = await convertMarkdownToHtml("footnote[^1]\n\n[^1]: note");
+    expect(html.trim()).toBe(
+      `<p>footnote<sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup></p>
+<section data-footnotes="" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
+<ol>
+<li id="user-content-fn-1">
+<p>note <a href="#user-content-fnref-1" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>`
+    );
+  });
+
+  it("should convert link literals to html", async () => {
+    const html = await convertMarkdownToHtml("https://example.com");
+    expect(html).toBe(
+      `<p><a href="https://example.com">https://example.com</a></p>`
+    );
+  });
+
+  it("should retain inline html", async () => {
+    const html = await convertMarkdownToHtml(
+      `<div style="color: red;">html</div>`
+    );
+    expect(html).toBe(`<div style="color: red;">html</div>`);
+  });
 });
