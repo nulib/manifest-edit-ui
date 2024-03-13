@@ -111,8 +111,7 @@ After conversion of a Word document to Markdown, there may be a need to make add
 **Refined Example**
 
 ```md
-- This text is *The Guide for the Heedless* by the learned Imam Sīdī ʿAbd
-  - Allāh ibn al-Ḥājj Ibrāhīm
+This text is *The Guide for the Heedless* by the learned Imam Sīdī ʿAbd Allāh ibn al-Ḥājj Ibrāhīm
 
 - All praise belongs to God, who led us
   - to the truth and away from falsehood, and denied us
@@ -133,6 +132,29 @@ After conversion of a Word document to Markdown, there may be a need to make add
     terms. Prohibited acts are forbidden, while acts that merit
     disapproval are discouraged.
 ```
+
+_rendered as:_
+
+This text is *The Guide for the Heedless* by the learned Imam Sīdī ʿAbd Allāh ibn al-Ḥājj Ibrāhīm
+
+- All praise belongs to God, who led us
+  - to the truth and away from falsehood, and denied us
+
+- What the best of the honored ones forbade us
+  - may our Lord bring him peace and pray upon him.
+
+- \[Falsehood\] incurs disapproval and prohibition,[^1]
+  - within it all the sciences of evil are discerned.
+
+- It includes conferring on someone a benefit or an affliction,
+  - which, according to law, is not deserved,
+
+- Or peering into the realm of the unseen
+  - or deploying a name for a worldly decree.
+
+[^1]: Prohibition (*manʿ*) and disapproval (*kurḥ*) are technical legal
+    terms. Prohibited acts are forbidden, while acts that merit
+    disapproval are discouraged.
 
 ## Developer Usage
 
