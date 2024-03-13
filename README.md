@@ -86,7 +86,7 @@ To ease in conversion of Microsoft Word documents to Markdown, a [Colab Notebook
 
 1. Sign into Google;
 2. Upload a local Word document;
-3. Match filename with expected document, ex: `translation.docx`
+3. In second codeblock, match filename with expected document, ex: `translation.docx`
 
 **Before**
 
