@@ -104,6 +104,36 @@ To ease in conversion of Microsoft Word documents to Markdown, a [Colab Notebook
 4. Run each code block in sequence.
 5. Copy the converted Markdown
 
+#### Additional Refinements
+
+After conversion of a Word document to Markdown, there may be a need to make additional refinements. This might include removing unnecessary line breaks, organizing footnote content, removing Word artifacts (ex: `[ ]{dir="rtl"}`), or formatting of a hemastitch.
+
+**Refined Example**
+
+```md
+- This text is *The Guide for the Heedless* by the learned Imam Sīdī ʿAbd
+  - Allāh ibn al-Ḥājj Ibrāhīm
+
+- All praise belongs to God, who led us
+  - to the truth and away from falsehood, and denied us
+
+- What the best of the honored ones forbade us
+  - may our Lord bring him peace and pray upon him.
+
+- \[Falsehood\] incurs disapproval and prohibition,[^1]
+  - within it all the sciences of evil are discerned.
+
+- It includes conferring on someone a benefit or an affliction,
+  - which, according to law, is not deserved,
+
+- Or peering into the realm of the unseen
+  - or deploying a name for a worldly decree.
+
+[^1]: Prohibition (*manʿ*) and disapproval (*kurḥ*) are technical legal
+    terms. Prohibited acts are forbidden, while acts that merit
+    disapproval are discouraged.
+```
+
 ## Developer Usage
 
 **Production Build**
