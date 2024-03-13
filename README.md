@@ -80,7 +80,7 @@ The Maktaba Collection Workbench supports the following elements for Markdown fo
 
 #### Converting Documents with Pandoc
 
-To ease in conversion of Microsoft Word documents to Markdown, a [Colab Notebook](https://colab.research.google.com/drive/1ieZV3QakWrRDDl7-idMXmvW3tVVxw_Yb) and [Video Example](#maktaba-pandoc) have been authored.
+To ease in conversion of Microsoft Word documents to Markdown, a [Colab Notebook](https://colab.research.google.com/drive/1ieZV3QakWrRDDl7-idMXmvW3tVVxw_Yb) and [Video Example (Download)](https://github.com/nulib/manifest-edit-ui/raw/deploy/staging/docs/media/maktaba-pandoc.mp4) have been authored.
 
 **Colab notebook steps**
 
