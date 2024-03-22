@@ -50,7 +50,7 @@ const UIDialog = ({
         }),
         headers: {
           Authorization: `Bearer ${authToken}`,
-          // "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
       },
     });
