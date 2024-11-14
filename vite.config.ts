@@ -6,11 +6,14 @@ import { resolve } from "path";
 import tsconfigPaths from "vite-tsconfig-paths";
 const outDir = resolve(__dirname, "dist");
 
+// Conditionally set `global` only in development
+const defineConfigOptions = {
+  ...(process.env.NODE_ENV === "development" ? { global: {} } : {}),
+};
+
 // https://vitejs.dev/guide/build.html#multi-page-app
 export default defineConfig({
-  define: {
-    global: process.env.NODE_ENV === "development" ? {} : undefined,
-  },
+  define: defineConfigOptions,
   plugins: [
     react(),
     eslint({
