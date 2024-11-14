@@ -1,14 +1,4 @@
-import {
-  Box,
-  Em,
-  Flex,
-  Section,
-  TableBody,
-  TableColumnHeaderCell,
-  TableHeader,
-  TableRow,
-  Text,
-} from "@radix-ui/themes";
+import { Box, Em, Section, Table, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 
 import { ManifestEditorManifest } from "types/manifest-editor";
@@ -47,21 +37,21 @@ const Collection = () => {
       </Text>
       <Box pt="4">
         <UITable>
-          <TableHeader>
-            <TableRow>
-              <TableColumnHeaderCell>Label</TableColumnHeaderCell>
-              <TableColumnHeaderCell>Provider</TableColumnHeaderCell>
-              <TableColumnHeaderCell>Status</TableColumnHeaderCell>
-              <TableColumnHeaderCell>
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeaderCell>Label</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell>Provider</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell>
                 <span style={{ visibility: "hidden" }}>Actions</span>
-              </TableColumnHeaderCell>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+              </Table.ColumnHeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {manifests?.map((item) => (
               <UITableCollectionItemsRow item={item} key={item.uri} />
             ))}
-          </TableBody>
+          </Table.Body>
         </UITable>
       </Box>
     </Section>

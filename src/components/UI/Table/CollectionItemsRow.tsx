@@ -1,15 +1,5 @@
 import { ActionTypes, useAppContext } from "context/AppContext";
-import {
-  Badge,
-  Box,
-  Button,
-  Flex,
-  Link,
-  TableCell,
-  TableRow,
-  TableRowHeaderCell,
-  Text,
-} from "@radix-ui/themes";
+import { Badge, Button, Flex, Link, Table, Text } from "@radix-ui/themes";
 import React, { MouseEventHandler } from "react";
 
 import DeleteManifest from "components/UI/DeleteManifest";
@@ -30,18 +20,20 @@ const UITableRow: React.FC<UITableRowProps> = ({ item }) => {
   };
 
   return (
-    <TableRow>
-      <TableRowHeaderCell>
-        <Link onClick={handleManifestClick}>
-          <Box>
-            <Text size="3" weight="medium">
-              {item.label}
-            </Text>
-          </Box>
-        </Link>
-      </TableRowHeaderCell>
-      <TableCell>{item.provider}</TableCell>
-      <TableCell>
+    <Table.Row>
+      <Table.Cell>
+        <Text asChild size="3" weight="medium">
+          <Link
+            href={`?iiif-content=${encodeURI(item.uri)}`}
+            onClick={handleManifestClick}
+            underline="hover"
+          >
+            {item.label}
+          </Link>
+        </Text>
+      </Table.Cell>
+      <Table.Cell>{item.provider}</Table.Cell>
+      <Table.Cell>
         {item.publicStatus ? (
           <Badge variant="outline">Public</Badge>
         ) : (
@@ -49,8 +41,8 @@ const UITableRow: React.FC<UITableRowProps> = ({ item }) => {
             Private
           </Badge>
         )}
-      </TableCell>
-      <TableCell>
+      </Table.Cell>
+      <Table.Cell>
         <Flex justify="end" gap="3">
           <Button onClick={handleManifestClick}>View</Button>
           <DeleteManifest
@@ -59,8 +51,8 @@ const UITableRow: React.FC<UITableRowProps> = ({ item }) => {
             uri={item.uri}
           />
         </Flex>
-      </TableCell>
-    </TableRow>
+      </Table.Cell>
+    </Table.Row>
   );
 };
 

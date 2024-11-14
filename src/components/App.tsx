@@ -1,14 +1,14 @@
 import "@radix-ui/themes/styles.css";
 import "styles/app.css";
 
+import { Box, Flex, Heading, Theme } from "@radix-ui/themes";
+
 import { Amplify } from "aws-amplify";
 import { AppProvider } from "context/AppContext";
 import { Authenticator } from "@aws-amplify/ui-react";
 import Editor from "components/Editor";
 import React from "react";
-import { Theme, Box, Flex, Heading } from "@radix-ui/themes";
 // @ts-ignore
-import { authenticatorComponents } from "components/Vendor/Amplify/Authenticator";
 import { projectTitle } from "data";
 
 Amplify.configure({

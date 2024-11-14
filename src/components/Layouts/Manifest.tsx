@@ -1,29 +1,22 @@
-import {
-  Box,
-  Section,
-  TableBody,
-  TableColumnHeaderCell,
-  TableHeader,
-  TableRow,
-} from "@radix-ui/themes";
+import { Box, Section, Table } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
-
-// @ts-ignore
-import CloverViewer from "@samvera/clover-iiif/viewer";
-import UITable from "components/UI/Table/Table";
-import UITableManifestItemsRow from "components/UI/Table/ManifestItemsRow";
-import { useAppContext } from "context/AppContext";
-import { Manifest } from "@iiif/presentation-3";
 import {
   cloverViewerCustomTheme,
   cloverViewerOptions,
 } from "lib/vendor/@samvera/clover-iiif";
+
+// @ts-ignore
+import CloverViewer from "@samvera/clover-iiif/viewer";
 import ManifestHeader from "components/UI/Manifest/Header";
+import { Manifest as ManifestType } from "@iiif/presentation-3";
+import UITable from "components/UI/Table/Table";
+import UITableManifestItemsRow from "components/UI/Table/ManifestItemsRow";
 import { convertPresentation2 } from "@iiif/parser/presentation-2";
+import { useAppContext } from "context/AppContext";
 
 const Manifest = () => {
-  const [manifest, setManifest] = useState<Manifest>();
-  const [activeCanvas, setActiveCanvas] = useState<String>();
+  const [manifest, setManifest] = useState<ManifestType>();
+  const [activeCanvas, setActiveCanvas] = useState<string>();
 
   const { state } = useAppContext();
   const { activeManifest } = state;
@@ -33,7 +26,7 @@ const Manifest = () => {
       fetch(activeManifest)
         .then((response) => response.json())
         .then((data) => {
-          const manifestJson = convertPresentation2(data) as Manifest;
+          const manifestJson = convertPresentation2(data) as ManifestType;
           setManifest(manifestJson);
         })
         .catch((error) => {
@@ -60,27 +53,26 @@ const Manifest = () => {
             <ManifestHeader activeManifest={activeManifest as string} />
           </Box>
           <UITable>
-            <TableHeader>
-              <TableRow>
-                <TableColumnHeaderCell>Canvas</TableColumnHeaderCell>
-                <TableColumnHeaderCell>Translation</TableColumnHeaderCell>
-                <TableColumnHeaderCell>Transcription</TableColumnHeaderCell>
-                <TableColumnHeaderCell>Notes</TableColumnHeaderCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {
-                // @ts-ignore
-                manifest?.items?.map((item) => (
-                  <UITableManifestItemsRow
-                    canvas={item}
-                    isActiveCanvas={item.id === activeCanvas}
-                    manifestId={manifest.id}
-                    key={item.id}
-                  />
-                ))
-              }
-            </TableBody>
+            <Table.Header>
+              <Table.Row>
+                <Table.ColumnHeaderCell>Hidden</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Canvas</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Translation</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Transcription</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Notes</Table.ColumnHeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {// @ts-ignore
+              manifest?.items?.map((item) => (
+                <UITableManifestItemsRow
+                  canvas={item}
+                  isActiveCanvas={item.id === activeCanvas}
+                  manifestId={manifest.id}
+                  key={item.id}
+                />
+              ))}
+            </Table.Body>
           </UITable>
         </Section>
       )}

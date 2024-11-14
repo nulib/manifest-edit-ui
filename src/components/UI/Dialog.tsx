@@ -1,16 +1,6 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Dialog,
-  Flex,
-  Popover,
-  Text,
-  TextArea,
-} from "@radix-ui/themes";
+import { Box, Button, Dialog, Flex, TextArea } from "@radix-ui/themes";
 import React, { useRef, useState } from "react";
 
-import { EyeClosedIcon } from "@radix-ui/react-icons";
 import getApiResponse from "lib/getApiResponse";
 import { useAppContext } from "context/AppContext";
 
@@ -59,10 +49,6 @@ const UIDialog = ({
       setOpen(false);
       onOpenChange();
     }
-  };
-
-  const handleClear = () => {
-    textAreaRef.current!.value = "";
   };
 
   const dir = type === "transcription" ? "rtl" : "ltr";
