@@ -2,7 +2,7 @@ import { InternationalString, Manifest } from "@iiif/presentation-3";
 
 import { convertPresentation2 } from "@iiif/parser/presentation-2";
 
-const contextAsArray = (json) => {
+const contextAsArray = (json: any) => {
   const context = Array.isArray(json["@context"])
     ? json["@context"]
     : [json["@context"]];
