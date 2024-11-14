@@ -23,11 +23,7 @@ const UITableRow: React.FC<UITableRowProps> = ({ item }) => {
     <Table.Row>
       <Table.Cell>
         <Text asChild size="3" weight="medium">
-          <Link
-            href={`?iiif-content=${encodeURI(item.uri)}`}
-            onClick={handleManifestClick}
-            underline="hover"
-          >
+          <Link href="#" onClick={handleManifestClick} underline="hover">
             {item.label}
           </Link>
         </Text>
