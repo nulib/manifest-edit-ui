@@ -1,17 +1,12 @@
 // @ts-nocheck
 
-import {
-  Badge,
-  Flex,
-  TableCell,
-  TableRow,
-  TableRowHeaderCell,
-} from "@radix-ui/themes";
+import { Badge, Flex, Table } from "@radix-ui/themes";
 import { Label, Thumbnail } from "@samvera/clover-iiif/primitives";
 
 import AnnotationCell from "components/UI/Table/AnnotationCell";
 import { Canvas } from "@iiif/presentation-3";
 import React from "react";
+import UITableHideCell from "./HideCell";
 
 interface UITableRowProps {
   canvas: Canvas;
@@ -31,12 +26,15 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
     resourceId = contentResource?.service[0]["@id"];
 
   return (
-    <TableRow
+    <Table.Row
       style={{
         backgroundColor: isActiveCanvas ? "var(--indigo-3)" : "inherit",
       }}
     >
-      <TableRowHeaderCell width="30%">
+      <Table.Cell>
+        <UITableHideCell manifestId={manifestId} resourceId={resourceId} />
+      </Table.Cell>
+      <Table.RowHeaderCell width="30%">
         <Flex gap="3" align="center">
           <Thumbnail
             thumbnail={canvas.thumbnail}
@@ -63,29 +61,29 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
             </Badge>
           )}
         </Flex>
-      </TableRowHeaderCell>
-      <TableCell>
+      </Table.RowHeaderCell>
+      <Table.Cell>
         <AnnotationCell
           manifestId={manifestId}
           motivation="translation"
           resourceId={resourceId}
         />
-      </TableCell>
-      <TableCell>
+      </Table.Cell>
+      <Table.Cell>
         <AnnotationCell
           manifestId={manifestId}
           motivation="transcription"
           resourceId={resourceId}
         />
-      </TableCell>
-      <TableCell>
+      </Table.Cell>
+      <Table.Cell>
         <AnnotationCell
           manifestId={manifestId}
           motivation="note"
           resourceId={resourceId}
         />
-      </TableCell>
-    </TableRow>
+      </Table.Cell>
+    </Table.Row>
   );
 };
 

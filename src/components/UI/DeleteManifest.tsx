@@ -1,6 +1,5 @@
 import { ActionTypes, useAppContext } from "context/AppContext";
 import {
-  Badge,
   Button,
   Callout,
   Checkbox,

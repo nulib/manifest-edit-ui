@@ -5,7 +5,6 @@ import {
   Em,
   Flex,
   RadioGroup,
-  Strong,
   Text,
   TextField,
 } from "@radix-ui/themes";
@@ -19,11 +18,7 @@ import { toastDefaults } from "lib/vendor/sonner";
 import { v4 as uuidv4 } from "uuid";
 
 const Required = () => {
-  return (
-    <Strong color="ruby" style={{ color: "var(--ruby-9)" }}>
-      *
-    </Strong>
-  );
+  return <strong style={{ color: "var(--ruby-9)" }}>*</strong>;
 };
 
 const UIAddManifest = () => {
@@ -107,11 +102,12 @@ const UIAddManifest = () => {
             <Text as="div" size="2" mb="1" weight="bold">
               URL <Required />
             </Text>
-            <TextField.Input
-              name="url"
-              onChange={(event) => setUri(event.target.value)}
+            <TextField.Root
               placeholder="The accessible URL of the source IIIF Manifest"
-            />
+              name="url"
+              size="2"
+              onChange={(event) => setUri(event.target.value)}
+            ></TextField.Root>
           </label>
           <label>
             <Text as="div" size="2" mb="2" weight="bold">
