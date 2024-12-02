@@ -1,12 +1,14 @@
-import { Box, Flex, Heading, Switch, Text } from "@radix-ui/themes";
+import { Box, Flex, Switch, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 
 import DeleteManifest from "components/UI/DeleteManifest";
+import { Manifest } from "@iiif/presentation-3";
 import { ManifestEditorManifest } from "types/manifest-editor";
+import UIEditString from "../EditString";
 import getApiResponse from "lib/getApiResponse";
 import { useAppContext } from "context/AppContext";
 
-const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
+const ManifestHeader = ({ manifest }: { manifest: Manifest }) => {
   const { state } = useAppContext();
   const { authToken } = state;
 
@@ -15,13 +17,15 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
   /**
    * Retrieve default values of Manifest
    */
-  useEffect(() => {
+  useEffect(() => refreshMetadata(), [manifest.id]);
+
+  const refreshMetadata = () => {
     getApiResponse({
       route: "/item",
       options: {
         method: "POST",
         body: JSON.stringify({
-          uri: activeManifest,
+          uri: manifest.id,
           sortKey: "METADATA",
         }),
         headers: {
@@ -30,7 +34,7 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
         },
       },
     }).then((response) => setMetadata(response));
-  }, [activeManifest]);
+  };
 
   /**
    * Update `publicStatus` boolean of Manifest and reset metadata
@@ -52,13 +56,46 @@ const ManifestHeader = ({ activeManifest }: { activeManifest: string }) => {
     }).then((response) => setMetadata(response));
   };
 
+  const handleStringSave = (metadata: ManifestEditorManifest) => {
+    getApiResponse({
+      route: "/metadata",
+      options: {
+        method: "PUT",
+        body: JSON.stringify({
+          ...metadata,
+        }),
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      },
+    }).then((response) => setMetadata(response));
+  };
+
   if (!metadata) return null;
 
   return (
-    <Flex justify="between" align="center">
-      <Flex gap="5" align="center">
-        <Heading size="7">{metadata.label}</Heading>
-        <Text size="2">({metadata.provider})</Text>
+    <Flex align="center" gap="6">
+      <Flex gap="1" direction="column" flexGrow="1">
+        <Text mb="2" size="1" color="gray">
+          {metadata.provider}
+        </Text>
+        <UIEditString
+          attribute="label"
+          metadata={metadata}
+          onSave={handleStringSave}
+          originalValue={manifest?.label}
+          textProps={{
+            size: "4",
+            weight: "bold",
+          }}
+        />
+        <UIEditString
+          attribute="summary"
+          metadata={metadata}
+          onSave={handleStringSave}
+          originalValue={manifest?.summary}
+        />
       </Flex>
       <Text as="label" size="2">
         <Flex gap="5" align="center">
