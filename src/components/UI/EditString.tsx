@@ -20,7 +20,7 @@ const UIEditString = ({
 }) => {
   const value = metadata[attribute]
     ? metadata[attribute]
-    : getLabelAsString(originalValue);
+    : getLabelAsString(originalValue) || "";
 
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value);

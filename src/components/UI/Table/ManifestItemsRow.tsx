@@ -7,6 +7,7 @@ import AnnotationCell from "components/UI/Table/AnnotationCell";
 import { Canvas } from "@iiif/presentation-3";
 import React from "react";
 import UITableHideCell from "./HideCell";
+import { getCanvasResourceId } from "lib/canvas-helpers";
 
 interface UITableRowProps {
   canvas: Canvas;
@@ -19,11 +20,7 @@ const UITableCanvasRow: React.FC<UITableRowProps> = ({
   isActiveCanvas,
   manifestId,
 }) => {
-  const contentResource = canvas.items[0].items[0].body;
-  let resourceId = contentResource?.id;
-
-  if (Array.isArray(contentResource?.service) && contentResource?.service[0])
-    resourceId = contentResource?.service[0]["@id"];
+  const resourceId = getCanvasResourceId(canvas);
 
   return (
     <Table.Row

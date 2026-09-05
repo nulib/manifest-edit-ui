@@ -8,7 +8,13 @@ import UIEditString from "../EditString";
 import getApiResponse from "lib/getApiResponse";
 import { useAppContext } from "context/AppContext";
 
-const ManifestHeader = ({ manifest }: { manifest: Manifest }) => {
+const ManifestHeader = ({
+  manifest,
+  manifestSourceUri,
+}: {
+  manifest: Manifest;
+  manifestSourceUri: string;
+}) => {
   const { state } = useAppContext();
   const { authToken } = state;
 
@@ -17,7 +23,7 @@ const ManifestHeader = ({ manifest }: { manifest: Manifest }) => {
   /**
    * Retrieve default values of Manifest
    */
-  useEffect(() => refreshMetadata(), [manifest.id]);
+  useEffect(() => refreshMetadata(), [manifest.id, manifestSourceUri]);
 
   const refreshMetadata = () => {
     getApiResponse({
@@ -25,7 +31,7 @@ const ManifestHeader = ({ manifest }: { manifest: Manifest }) => {
       options: {
         method: "POST",
         body: JSON.stringify({
-          uri: manifest.id,
+          uri: manifestSourceUri,
           sortKey: "METADATA",
         }),
         headers: {

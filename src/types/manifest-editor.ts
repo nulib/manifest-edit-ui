@@ -1,5 +1,6 @@
 interface ManifestEditorManifest {
   uri: string;
+  publishKey: string;
   label: string;
   summary: string;
   provider: string;

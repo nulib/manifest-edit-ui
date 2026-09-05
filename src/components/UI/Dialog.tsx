@@ -7,16 +7,16 @@ import { useAppContext } from "context/AppContext";
 const UIDialog = ({
   manifestId,
   method,
-  onOpenChange,
-  resourceId,
+  onSaved,
+  sortKey,
   type,
   defaultValue,
 }: {
   manifestId: string;
   method: "POST" | "PUT";
-  onOpenChange: () => void;
-  resourceId: string;
-  type: "transcription" | "translation";
+  onSaved: () => void;
+  sortKey: string;
+  type: "note" | "transcription" | "translation";
   defaultValue?: string;
 }) => {
   const [open, setOpen] = useState(false);
@@ -27,8 +27,6 @@ const UIDialog = ({
 
   const handleSave = async () => {
     const value = textAreaRef.current?.value;
-    const sortKey = `${type.toUpperCase()}#${resourceId}`;
-
     const response = await getApiResponse({
       route: "/annotation",
       options: {
@@ -45,9 +43,9 @@ const UIDialog = ({
       },
     });
 
-    if (response?.value) {
+    if (response?.sortKey) {
       setOpen(false);
-      onOpenChange();
+      onSaved();
     }
   };
 
@@ -55,8 +53,8 @@ const UIDialog = ({
   const verb = method === "PUT" ? "Edit" : "Add";
 
   return (
-    <Dialog.Root onOpenChange={onOpenChange} open={open}>
-      <Dialog.Trigger onClick={() => setOpen(!open)}>
+    <Dialog.Root onOpenChange={setOpen} open={open}>
+      <Dialog.Trigger>
         <Button
           variant={method === "PUT" ? "soft" : "solid"}
           style={{ whiteSpace: "nowrap" }}

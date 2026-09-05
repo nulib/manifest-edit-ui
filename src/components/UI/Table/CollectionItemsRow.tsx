@@ -4,6 +4,7 @@ import React, { MouseEventHandler } from "react";
 
 import DeleteManifest from "components/UI/DeleteManifest";
 import { ManifestEditorManifest } from "types/manifest-editor";
+import { getSourceManifestUri } from "lib/iiif-helpers";
 
 interface UITableRowProps {
   item: ManifestEditorManifest;
@@ -15,8 +16,20 @@ const UITableRow: React.FC<UITableRowProps> = ({ item }) => {
   const handleManifestClick: MouseEventHandler<
     HTMLAnchorElement | HTMLButtonElement
   > = () => {
+    const sourceManifestUri = getSourceManifestUri(
+      import.meta.env.VITE_IIIF_BASE_URL,
+      item.publishKey
+    );
+
     dispatch({ type: ActionTypes.SET_SCREEN, payload: "Manifest" });
-    dispatch({ type: ActionTypes.SET_ACTIVE_MANIFEST, payload: item.uri });
+    dispatch({
+      type: ActionTypes.SET_ACTIVE_MANIFEST,
+      payload: sourceManifestUri,
+    });
+    dispatch({
+      type: ActionTypes.SET_ACTIVE_MANIFEST_SOURCE_URI,
+      payload: item.uri,
+    });
   };
 
   return (

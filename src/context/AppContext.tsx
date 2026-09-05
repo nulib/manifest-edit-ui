@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 interface AppState {
   activeCanvas?: string;
   activeManifest?: string;
+  activeManifestSourceUri?: string;
   authToken?: string;
   collection?: string;
   screen: "Collection" | "Manifest" | "Canvas";
@@ -15,6 +16,7 @@ interface AppState {
 enum ActionTypes {
   SET_ACTIVE_CANVAS = "SET_ACTIVE_CANVAS",
   SET_ACTIVE_MANIFEST = "SET_ACTIVE_MANIFEST",
+  SET_ACTIVE_MANIFEST_SOURCE_URI = "SET_ACTIVE_MANIFEST_SOURCE_URI",
   SET_SCREEN_ID = "SET_SCREEN_ID",
   SET_SCREEN = "SET_SCREEN",
 }
@@ -25,6 +27,10 @@ type AppAction =
       type: ActionTypes.SET_ACTIVE_MANIFEST;
       payload: AppState["activeManifest"];
     }
+  | {
+      type: ActionTypes.SET_ACTIVE_MANIFEST_SOURCE_URI;
+      payload: AppState["activeManifestSourceUri"];
+    }
   | { type: ActionTypes.SET_SCREEN; payload: AppState["screen"] }
   | { type: ActionTypes.SET_SCREEN_ID; payload: AppState["screenId"] };
 
@@ -34,6 +40,8 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, activeCanvas: action.payload };
     case ActionTypes.SET_ACTIVE_MANIFEST:
       return { ...state, activeManifest: action.payload };
+    case ActionTypes.SET_ACTIVE_MANIFEST_SOURCE_URI:
+      return { ...state, activeManifestSourceUri: action.payload };
     case ActionTypes.SET_SCREEN:
       return { ...state, screen: action.payload };
     case ActionTypes.SET_SCREEN_ID:

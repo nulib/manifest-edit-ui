@@ -1,5 +1,11 @@
 interface IGetApiResponse {
-  route: "/annotation" | "/item" | "/manifests" | "/metadata" | "/publish";
+  route:
+    | "/annotation"
+    | "/canvas"
+    | "/item"
+    | "/manifests"
+    | "/metadata"
+    | "/publish";
   options?: RequestInit;
 }
 
