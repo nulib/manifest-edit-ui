@@ -19,6 +19,16 @@ const isURL = (uri: string) => {
   }
 };
 
+const getSourceManifestUri = (iiifBaseUrl: string, publishKey: string) => {
+  if (!iiifBaseUrl || !publishKey) {
+    throw new Error("Unable to determine the cached source manifest URI");
+  }
+
+  return `${iiifBaseUrl.replace(/\/+$/, "")}/sources/${encodeURIComponent(
+    publishKey
+  )}.json`;
+};
+
 const getPresentation3 = (json: Manifest) => {
   const context = contextAsArray(json);
   const validContexts = [
@@ -80,4 +90,4 @@ const getLabelAsString = (
   return Array.isArray(entries) ? entries.join(`${delimiter}`) : entries;
 };
 
-export { isURL, getManifest, getLabelAsString };
+export { isURL, getManifest, getLabelAsString, getSourceManifestUri };
