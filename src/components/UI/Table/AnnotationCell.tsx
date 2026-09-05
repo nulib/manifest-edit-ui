@@ -8,7 +8,7 @@ import { useAppContext } from "context/AppContext";
 
 interface AnnotationCellProps {
   manifestId: string;
-  motivation: "transcription" | "translation";
+  motivation: "note" | "transcription" | "translation";
   resourceId: string;
 }
 
@@ -17,14 +17,15 @@ const UITableAnnotationCell: React.FC<AnnotationCellProps> = ({
   motivation,
   resourceId,
 }) => {
-  const [refresh, setRefresh] = useState(true);
+  const [refresh, setRefresh] = useState(0);
+  const [storedSortKey, setStoredSortKey] = useState<string>();
   const [value, setValue] = useState("");
 
   const { state } = useAppContext();
   const { authToken } = state;
 
   // creates sortKey, ex: TRANSCRIPTION#https://resource.uri/id/info.json
-  const sortKey = `${motivation.toUpperCase()}#${resourceId}`;
+  const canonicalSortKey = `${motivation.toUpperCase()}#${resourceId}`;
   const dir = ["translation", "note"].includes(motivation) ? "ltr" : "rtl";
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const UITableAnnotationCell: React.FC<AnnotationCellProps> = ({
           method: "POST",
           body: JSON.stringify({
             uri: manifestId,
-            sortKey,
+            sortKey: canonicalSortKey,
           }),
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -44,27 +45,26 @@ const UITableAnnotationCell: React.FC<AnnotationCellProps> = ({
         },
       });
 
-      if (response?.value) setValue(response.value);
-
-      setRefresh(false);
+      setValue(response?.value || "");
+      setStoredSortKey(response?.sortKey);
     })();
-  }, [refresh]);
+  }, [authToken, canonicalSortKey, manifestId, refresh]);
 
-  const handleOnOpenChange = () => {
-    setRefresh(true);
+  const handleSaved = () => {
+    setRefresh((current) => current + 1);
   };
 
   return (
     <Flex direction="column" gap="3">
       <Box>
         <UIDialog
-          key={sortKey}
+          key={storedSortKey || canonicalSortKey}
           defaultValue={value}
           manifestId={manifestId}
-          onOpenChange={handleOnOpenChange}
+          onSaved={handleSaved}
           type={motivation}
-          resourceId={resourceId}
-          method={value ? "PUT" : "POST"}
+          sortKey={storedSortKey || canonicalSortKey}
+          method={storedSortKey ? "PUT" : "POST"}
         />
       </Box>
       {value && <UIScrollArea dir={dir} value={value} />}

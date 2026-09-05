@@ -19,7 +19,7 @@ const Manifest = () => {
   const [activeCanvas, setActiveCanvas] = useState<string>();
 
   const { state } = useAppContext();
-  const { activeManifest } = state;
+  const { activeManifest, activeManifestSourceUri } = state;
 
   useEffect(() => {
     if (activeManifest)
@@ -50,7 +50,10 @@ const Manifest = () => {
       {manifest && (
         <Section size="1" pr="5" pl="5">
           <Box pb="4">
-            <ManifestHeader manifest={manifest} />
+            <ManifestHeader
+              manifest={manifest}
+              manifestSourceUri={activeManifestSourceUri || manifest.id}
+            />
           </Box>
           <UITable>
             <Table.Header>
@@ -68,7 +71,7 @@ const Manifest = () => {
                 <UITableManifestItemsRow
                   canvas={item}
                   isActiveCanvas={item.id === activeCanvas}
-                  manifestId={manifest.id}
+                  manifestId={activeManifestSourceUri || manifest.id}
                   key={item.id}
                 />
               ))}

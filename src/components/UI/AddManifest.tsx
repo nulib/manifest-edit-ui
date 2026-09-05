@@ -51,6 +51,7 @@ const UIAddManifest = () => {
               label,
               provider,
               publicStatus: false,
+              sourceManifest: manifest,
               sortKey: "METADATA",
               uri,
             }),
@@ -72,6 +73,10 @@ const UIAddManifest = () => {
           dispatch({ type: ActionTypes.SET_SCREEN_ID, payload: uuidv4() });
           dispatch({
             type: ActionTypes.SET_ACTIVE_MANIFEST,
+            payload: undefined,
+          });
+          dispatch({
+            type: ActionTypes.SET_ACTIVE_MANIFEST_SOURCE_URI,
             payload: undefined,
           });
         }

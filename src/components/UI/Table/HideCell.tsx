@@ -13,20 +13,13 @@ const UITableHideCell: React.FC<HideCellProps> = ({
   manifestId,
   resourceId,
 }) => {
-  const [hide, setHide] = useState<boolean | undefined>();
-  const [method, setMethod] = useState<"POST" | "PUT">("POST");
+  const [hide, setHide] = useState(false);
+  const [storedSortKey, setStoredSortKey] = useState<string>();
 
   const { state } = useAppContext();
   const { authToken } = state;
 
-  const sortKey = `CANVAS#${resourceId}`;
-
-  useEffect(() => {
-    console.log(`hide`, hide);
-    if (hide === undefined) return;
-
-    setMethod("PUT");
-  }, [hide]);
+  const canonicalSortKey = `CANVAS#${resourceId}`;
 
   useEffect(() => {
     (async () => {
@@ -36,7 +29,7 @@ const UITableHideCell: React.FC<HideCellProps> = ({
           method: "POST",
           body: JSON.stringify({
             uri: manifestId,
-            sortKey,
+            sortKey: canonicalSortKey,
           }),
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -45,21 +38,24 @@ const UITableHideCell: React.FC<HideCellProps> = ({
         },
       });
 
-      setHide(response.hide);
+      if (response) {
+        setHide(response.hide === true);
+        setStoredSortKey(response.sortKey);
+      }
     })();
-  }, []);
+  }, [authToken, canonicalSortKey, manifestId]);
 
   const onCheckedChange = async (
-    checked: React.ChangeEvent<HTMLInputElement>
+    checked: boolean | "indeterminate"
   ) => {
     const response = await getApiResponse({
       route: "/canvas",
       options: {
-        method,
+        method: storedSortKey ? "PUT" : "POST",
         body: JSON.stringify({
           uri: manifestId,
-          sortKey,
-          hide: checked,
+          sortKey: storedSortKey || canonicalSortKey,
+          hide: checked === true,
         }),
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -68,7 +64,10 @@ const UITableHideCell: React.FC<HideCellProps> = ({
       },
     });
 
-    setHide(response.hide);
+    if (response) {
+      setHide(response.hide === true);
+      setStoredSortKey(response.sortKey);
+    }
   };
 
   return (

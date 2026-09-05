@@ -57,6 +57,10 @@ const UIDeleteManifest = ({
         dispatch({ type: ActionTypes.SET_SCREEN, payload: "Collection" });
         dispatch({ type: ActionTypes.SET_SCREEN_ID, payload: uuidv4() });
         dispatch({ type: ActionTypes.SET_ACTIVE_MANIFEST, payload: undefined });
+        dispatch({
+          type: ActionTypes.SET_ACTIVE_MANIFEST_SOURCE_URI,
+          payload: undefined,
+        });
       }
     } catch (error) {
       toast.dismiss();

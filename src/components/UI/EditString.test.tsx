@@ -6,6 +6,7 @@ import React from "react";
 
 const metadata: ManifestEditorManifest = {
   label: "My Label",
+  publishKey: "publish-key",
   summary: "summary",
   provider: "provider",
   publicStatus: false,
